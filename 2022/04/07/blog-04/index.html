@@ -20,13 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/FOC.github.io/js/config.js"></script>
 
-    <meta property="og:type" content="article">
-<meta property="og:title" content="语法分析">
+    <meta name="description" content="本章阐述编译器采用的典型语法分析方法。首先提出有关上下文无关文法的基本概念，然后介绍适合于手工实现的预测分析技术，最后给出自动工具采用的LR分析算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三章 语法分析">
 <meta property="og:url" content="https://suijiyun.github.io/FOC.github.io/2022/04/07/blog-04/index.html">
 <meta property="og:site_name" content="编译原理">
+<meta property="og:description" content="本章阐述编译器采用的典型语法分析方法。首先提出有关上下文无关文法的基本概念，然后介绍适合于手工实现的预测分析技术，最后给出自动工具采用的LR分析算法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-07T01:21:44.000Z">
-<meta property="article:modified_time" content="2022-04-08T06:22:04.695Z">
+<meta property="article:modified_time" content="2022-04-15T08:41:50.490Z">
 <meta property="article:author" content="隋纪运">
 <meta property="article:tag" content="-介绍">
 <meta name="twitter:card" content="summary">
@@ -36,10 +38,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://suijiyun.github.io/FOC.github.io/2022/04/07/blog-04/","path":"2022/04/07/blog-04/","title":"语法分析"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://suijiyun.github.io/FOC.github.io/2022/04/07/blog-04/","path":"2022/04/07/blog-04/","title":"第三章 语法分析"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>语法分析 | 编译原理</title>
+<title>第三章 语法分析 | 编译原理</title>
   
 
 
@@ -111,7 +113,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -124,6 +126,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">3.1上下文无关文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.</span> <span class="nav-text">3.1.1 上下文无关文法的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.2.</span> <span class="nav-text">3.1.2 推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-%E5%88%86%E6%9E%90%E6%A0%91"><span class="nav-number">1.3.</span> <span class="nav-text">3.1.3 分析树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-4-%E4%BA%8C%E4%B9%89%E6%80%A7"><span class="nav-number">1.4.</span> <span class="nav-text">3.1.4 二义性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E8%AF%AD%E8%A8%80%E5%92%8C%E6%96%87%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">3.2 语言和文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-%E6%AD%A3%E8%A7%84%E5%BC%8F%E5%92%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">2.1.</span> <span class="nav-text">3.2.1 正规式和上下文无关文法的比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-%E5%88%86%E7%A6%BB%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8%E7%90%86%E7%94%B1"><span class="nav-number">2.2.</span> <span class="nav-text">3.2.2 分离词法分析器理由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E9%AA%8C%E8%AF%81%E6%96%87%E6%B3%95%E4%BA%A7%E7%94%9F%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="nav-number">2.3.</span> <span class="nav-text">3.2.3 验证文法产生的语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-%E9%80%82%E5%BD%93%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%96%87%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">3.2.4 适当的表达式文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-5-%E6%B6%88%E9%99%A4%E4%BA%8C%E4%B9%89%E6%80%A7"><span class="nav-number">2.5.</span> <span class="nav-text">3.2.5 消除二义性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-6-%E6%B6%88%E9%99%A4%E5%B7%A6%E9%80%92%E5%BD%92"><span class="nav-number">2.6.</span> <span class="nav-text">3.2.6 消除左递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-7-%E6%8F%90%E5%B7%A6%E5%9B%A0%E5%AD%90"><span class="nav-number">2.7.</span> <span class="nav-text">3.2.7 提左因子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-8-%E9%9D%9E%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E7%9A%84%E8%AF%AD%E8%A8%80%E7%BB%93%E6%9E%84"><span class="nav-number">2.8.</span> <span class="nav-text">3.2.8 非上下文无关的语言结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-9-%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80%E9%B8%9F%E7%9E%B0"><span class="nav-number">2.9.</span> <span class="nav-text">3.2.9 形式语言鸟瞰</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E8%87%AA%E4%B8%8A%E8%80%8C%E4%B8%8B%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">3.3 自上而下分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-%E8%87%AA%E4%B8%8A%E8%80%8C%E4%B8%8B%E5%88%86%E6%9E%90%E7%9A%84%E4%B8%80%E8%88%AC%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">3.3.1 自上而下分析的一般方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-LL-1-%E6%96%87%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">3.3.2 LL(1)文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-%E9%80%92%E5%BD%92%E4%B8%8B%E9%99%8D%E7%9A%84%E9%A2%84%E6%B5%8B%E5%88%86%E6%9E%90"><span class="nav-number">3.3.</span> <span class="nav-text">3.3.3 递归下降的预测分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-4-%E9%9D%9E%E9%80%92%E5%BD%92%E7%9A%84%E9%A2%84%E6%B5%8B%E5%88%86%E6%9E%90"><span class="nav-number">3.4.</span> <span class="nav-text">3.3.4 非递归的预测分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-5-%E6%9E%84%E9%80%A0%E9%A2%84%E6%B5%8B%E5%88%86%E6%9E%90%E8%A1%A8"><span class="nav-number">3.5.</span> <span class="nav-text">3.3.5 构造预测分析表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-6-%E9%A2%84%E6%B5%8B%E5%88%86%E6%9E%90%E7%9A%84%E9%94%99%E8%AF%AF%E6%81%A2%E5%A4%8D"><span class="nav-number">3.6.</span> <span class="nav-text">3.3.6 预测分析的错误恢复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E8%87%AA%E4%B8%8B%E8%80%8C%E4%B8%8A%E5%88%86%E6%9E%90"><span class="nav-number">4.</span> <span class="nav-text">3.4 自下而上分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-%E5%BD%92%E7%BA%A6"><span class="nav-number">4.1.</span> <span class="nav-text">3.4.1 归约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-%E5%8F%A5%E6%9F%84"><span class="nav-number">4.2.</span> <span class="nav-text">3.4.2 句柄</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-3-%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E7%A7%BB%E8%BF%9B-%E5%BD%92%E7%BA%A6%E5%88%86%E6%9E%90"><span class="nav-number">4.3.</span> <span class="nav-text">3.4.3 用栈实现移进-归约分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-4-%E7%A7%BB%E8%BF%9B-%E5%BD%92%E7%BA%A6%E5%88%86%E6%9E%90%E7%9A%84%E5%86%B2%E7%AA%81"><span class="nav-number">4.4.</span> <span class="nav-text">3.4.4 移进-归约分析的冲突</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-LR%E5%88%86%E6%9E%90%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">3.5 LR分析器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-1-LR%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text">3.5.1 LR分析算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-2-LR%E6%96%87%E6%B3%95%E5%92%8CLR%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">5.2.</span> <span class="nav-text">3.5.2 LR文法和LR分析方法的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-3-%E6%9E%84%E9%80%A0SLR%E5%88%86%E6%9E%90%E8%A1%A8"><span class="nav-number">5.3.</span> <span class="nav-text">3.5.3 构造SLR分析表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-4-%E6%9E%84%E9%80%A0%E8%A7%84%E8%8C%83%E7%9A%84LR%E5%88%86%E6%9E%90%E8%A1%A8"><span class="nav-number">5.4.</span> <span class="nav-text">3.5.4 构造规范的LR分析表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-5-%E6%9E%84%E9%80%A0LALR%E5%88%86%E6%9E%90%E8%A1%A8"><span class="nav-number">5.5.</span> <span class="nav-text">3.5.5 构造LALR分析表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-6-%E9%9D%9ELR%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E7%BB%93%E6%9E%84"><span class="nav-number">5.6.</span> <span class="nav-text">3.5.6 非LR的上下文无关结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-%E4%BA%8C%E4%B9%89%E6%96%87%E6%B3%95%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">3.6 二义文法的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-1-%E4%BD%BF%E7%94%A8%E6%96%87%E6%B3%95%E4%BB%A5%E5%A4%96%E4%BF%A1%E6%81%AF%E6%9D%A5%E8%A7%A3%E5%86%B3%E5%88%86%E6%9E%90%E5%8A%A8%E4%BD%9C%E5%86%B2%E7%AA%81"><span class="nav-number">6.1.</span> <span class="nav-text">3.6.1 使用文法以外信息来解决分析动作冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-2-%E7%89%B9%E6%AE%8A%E6%83%85%E5%86%B5%E4%BA%A7%E7%94%9F%E5%BC%8F%E5%BC%95%E8%B5%B7%E7%9A%84%E4%BA%8C%E4%B9%89%E6%80%A7"><span class="nav-number">6.2.</span> <span class="nav-text">3.6.2 特殊情况产生式引起的二义性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-3-LR%E5%88%86%E6%9E%90%E7%9A%84%E9%94%99%E8%AF%AF%E6%81%A2%E5%A4%8D"><span class="nav-number">6.3.</span> <span class="nav-text">3.6.3 LR分析的错误恢复</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-%E5%88%86%E6%9E%90%E5%99%A8%E7%9A%84%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">7.</span> <span class="nav-text">3.7 分析器的生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-1-%E5%88%86%E6%9E%90%E5%99%A8%E7%9A%84%E7%94%9F%E6%88%90%E5%99%A8Yacc"><span class="nav-number">7.1.</span> <span class="nav-text">3.7.1 分析器的生成器Yacc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-2-%E7%94%A8Yacc%E5%A4%84%E7%90%86%E4%BA%8C%E4%B9%89%E6%96%87%E6%B3%95"><span class="nav-number">7.2.</span> <span class="nav-text">3.7.2 用Yacc处理二义文法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-3-Yacc%E7%9A%84%E9%94%99%E8%AF%AF%E6%81%A2%E5%A4%8D"><span class="nav-number">7.3.</span> <span class="nav-text">3.7.3 Yacc的错误恢复</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -141,6 +144,11 @@
           <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/FOC.github.io/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/FOC.github.io/tags/">
@@ -196,12 +204,12 @@
     </span>
     
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="语法分析 | 编译原理">
+      <meta itemprop="name" content="第三章 语法分析 | 编译原理">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          语法分析
+          第三章 语法分析
         </h1>
 
         <div class="post-meta-container">
@@ -219,7 +227,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-08 14:22:04" itemprop="dateModified" datetime="2022-04-08T14:22:04+08:00">2022-04-08</time>
+      <time title="修改时间：2022-04-15 16:41:50" itemprop="dateModified" datetime="2022-04-15T16:41:50+08:00">2022-04-15</time>
     </span>
 
   
@@ -232,7 +240,176 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <p>本章阐述编译器采用的典型语法分析方法。首先提出有关上下文无关文法的基本概念，然后介绍适合于手工实现的预测分析技术，最后给出自动工具采用的LR分析算法。</p>
+<span id="more"></span>
+<h2 id="3-1上下文无关文法"><a href="#3-1上下文无关文法" class="headerlink" title="3.1上下文无关文法"></a>3.1上下文无关文法</h2><h3 id="3-1-1-上下文无关文法的定义"><a href="#3-1-1-上下文无关文法的定义" class="headerlink" title="3.1.1 上下文无关文法的定义"></a>3.1.1 上下文无关文法的定义</h3><ul>
+<li><p>正规式能定义一些简单的语言，能表示给定结构的固定次数的重复或者没有指定次数的重复<br>  例：a (ba)<sup>5</sup>, a (ba)<sup>*</sup></p>
+</li>
+<li><p>正规式不能用于描述配对或嵌套的结构<br>  例1：配对括号串的集合<br>  例2：{wcw | w是a和b的串} </p>
+</li>
+<li><p>上下文无关文法是四元组（V<sub>T</sub> , V<sub>N</sub> , S, P）<br>  V<sub>T</sub> :     终结符集合<br>  V<sub>N</sub>:     非终结符集合<br>  S :     开始符号<br>  P :    产生式集合， 产生式形式 : A → α<br>例 ( {id, +, * ，-， (, )}, {expr, op}, expr, P )<br>  expr → expr op expr          expr → (expr)<br>  expr → - expr          expr → id<br>  op → +                   op → *</p>
+</li>
+</ul>
+<h3 id="3-1-2-推导"><a href="#3-1-2-推导" class="headerlink" title="3.1.2 推导"></a>3.1.2 推导</h3><ul>
+<li>把产生式看成重写规则，把符号串中的非终结符用其产生式右部的串来代替<br>  例: E  E + E | E * E | (E ) | - E | id<br>  E &#x3D;&gt; -E &#x3D;&gt; -(E) &#x3D;&gt; -(E + E) &#x3D;&gt; -(id + E)&#x3D;&gt; -(id + id) </li>
+<li>概念    <ul>
+<li>上下文无关语言、等价的文法、句型</li>
+<li>记号<br>  S &#x3D;&gt;<sup>*</sup>α 、S &#x3D;&gt;<sup>+</sup> w</li>
+<li>最左推导<br>  E &#x3D;&gt;<sub>lm</sub> -E  &#x3D;&gt;<sub>lm</sub>-(E) &#x3D;&gt;<sub>lm</sub> -(E + E)&#x3D;&gt;<sub>lm</sub>-(id + E) &#x3D;&gt;<sub>lm</sub> -(id + id)</li>
+<li>最右推导（规范推导）<br>  E &#x3D;&gt;<sub>rm</sub> -E &#x3D;&gt;<sub>rm</sub> -(E) &#x3D;&gt;<sub>rm</sub>-(E + E)&#x3D;&gt;<sub>rm</sub>-(E + id)&#x3D;&gt;<sub>rm</sub>-(id + id)</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-1-3-分析树"><a href="#3-1-3-分析树" class="headerlink" title="3.1.3 分析树"></a>3.1.3 分析树</h3><h3 id="3-1-4-二义性"><a href="#3-1-4-二义性" class="headerlink" title="3.1.4 二义性"></a>3.1.4 二义性</h3><h2 id="3-2-语言和文法"><a href="#3-2-语言和文法" class="headerlink" title="3.2 语言和文法"></a>3.2 语言和文法</h2><ul>
+<li><p>文法的优点 </p>
+<ul>
+<li>文法给出了精确的，易于理解的语法说明</li>
+<li>自动产生高效的分析器</li>
+<li>可以给语言定义出层次结构</li>
+<li>以文法为基础的语言的实现便于语言的修改</li>
+</ul>
+</li>
+<li><p>文法的问题</p>
+<ul>
+<li>文法只能描述编程语言的大部分语法<h3 id="3-2-1-正规式和上下文无关文法的比较"><a href="#3-2-1-正规式和上下文无关文法的比较" class="headerlink" title="3.2.1 正规式和上下文无关文法的比较"></a>3.2.1 正规式和上下文无关文法的比较</h3></li>
+</ul>
+</li>
+<li><p>正规式</p>
+</li>
+<li><p>文法</p>
+</li>
+</ul>
+<h3 id="3-2-2-分离词法分析器理由"><a href="#3-2-2-分离词法分析器理由" class="headerlink" title="3.2.2 分离词法分析器理由"></a>3.2.2 分离词法分析器理由</h3><ul>
+<li>为什么要用正规式定义词法 <ul>
+<li>词法规则非常简单，不必用上下文无关文法</li>
+<li>对于词法记号，正规式描述简洁且易于理解</li>
+<li>从正规式构造出的词法分析器效率高</li>
+</ul>
+</li>
+<li>从软件工程角度看，词法分析和语法分析的分离有如下好处<ul>
+<li>简化设计</li>
+<li>编译器的效率会改进</li>
+<li>编译器的可移植性加强</li>
+<li>便于编译器前端的模块划分</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-3-验证文法产生的语言"><a href="#3-2-3-验证文法产生的语言" class="headerlink" title="3.2.3 验证文法产生的语言"></a>3.2.3 验证文法产生的语言</h3><p>G : S → (S ) S | ε    L(G) &#x3D; 配对的括号串的集合</p>
+<ul>
+<li>按推导步数进行归纳：推出的是配对括号串<ul>
+<li>归纳基础： S &#x3D;&gt; ε</li>
+<li>归纳假设：少于n步的推导都产生配对的括号串</li>
+<li>归纳步骤：n步的最左推导如下：<br>  S &#x3D;&gt; (S)S &#x3D;&gt;<sup><em></sup> (x) S &#x3D;&gt;<sup></em></sup> (x) y</li>
+</ul>
+</li>
+<li>按串长进行归纳：配对括号串可由S推出<ul>
+<li>归纳基础： S &#x3D;&gt; ε</li>
+<li>归纳假设：长度小于2n的都可以从S推导出来 </li>
+<li>归纳步骤：考虑长度为2n(n ≥ 1)的w &#x3D; (x) y<br>  S &#x3D;&gt; (S )S &#x3D;&gt;<sup><em></sup> (x) S &#x3D;&gt;<sup></em></sup> (x) y<h3 id="3-2-4-适当的表达式文法"><a href="#3-2-4-适当的表达式文法" class="headerlink" title="3.2.4 适当的表达式文法"></a>3.2.4 适当的表达式文法</h3><h3 id="3-2-5-消除二义性"><a href="#3-2-5-消除二义性" class="headerlink" title="3.2.5 消除二义性"></a>3.2.5 消除二义性</h3><h3 id="3-2-6-消除左递归"><a href="#3-2-6-消除左递归" class="headerlink" title="3.2.6 消除左递归"></a>3.2.6 消除左递归</h3><h3 id="3-2-7-提左因子"><a href="#3-2-7-提左因子" class="headerlink" title="3.2.7 提左因子"></a>3.2.7 提左因子</h3><h3 id="3-2-8-非上下文无关的语言结构"><a href="#3-2-8-非上下文无关的语言结构" class="headerlink" title="3.2.8 非上下文无关的语言结构"></a>3.2.8 非上下文无关的语言结构</h3><h3 id="3-2-9-形式语言鸟瞰"><a href="#3-2-9-形式语言鸟瞰" class="headerlink" title="3.2.9 形式语言鸟瞰"></a>3.2.9 形式语言鸟瞰</h3></li>
+</ul>
+</li>
+<li>文法 G &#x3D; (VT , VN, S, P)</li>
+<li>0型文法：α → β，α , β ∈  (V<sub>N</sub> ∪V<sub>T</sub>)<sup>*</sup>, | α | ≥ 1</li>
+<li>1型文法：| α | ≤ | β |，但S → ε可以例外</li>
+<li>2型文法：A → β，A∈V<sub>N</sub>  , β ∈ (V<sub>N</sub>  ∪V<sub>T</sub>)<sup>*</sup></li>
+<li>3型文法：A → αB或A → α，A, B∈V<sub>N</sub>  , α ∈V<sub>T</sub> </li>
+<li>短语文法、上下文有关文法、上下文无关文法、正规文法</li>
+</ul>
+<h2 id="3-3-自上而下分析"><a href="#3-3-自上而下分析" class="headerlink" title="3.3 自上而下分析"></a>3.3 自上而下分析</h2><h3 id="3-3-1-自上而下分析的一般方法"><a href="#3-3-1-自上而下分析的一般方法" class="headerlink" title="3.3.1 自上而下分析的一般方法"></a>3.3.1 自上而下分析的一般方法</h3><h3 id="3-3-2-LL-1-文法"><a href="#3-3-2-LL-1-文法" class="headerlink" title="3.3.2 LL(1)文法"></a>3.3.2 LL(1)文法</h3><ul>
+<li>LL(1)文法</li>
+<li>LL(1)文法有一些明显的性质<ul>
+<li>没有公共左因子</li>
+<li>不是二义的</li>
+<li>不含左递归<h3 id="3-3-3-递归下降的预测分析"><a href="#3-3-3-递归下降的预测分析" class="headerlink" title="3.3.3 递归下降的预测分析"></a>3.3.3 递归下降的预测分析</h3><h3 id="3-3-4-非递归的预测分析"><a href="#3-3-4-非递归的预测分析" class="headerlink" title="3.3.4 非递归的预测分析"></a>3.3.4 非递归的预测分析</h3><h3 id="3-3-5-构造预测分析表"><a href="#3-3-5-构造预测分析表" class="headerlink" title="3.3.5 构造预测分析表"></a>3.3.5 构造预测分析表</h3>（1）对文法的每个产生式A   ，执行(2)和(3)<br>（2）对FIRST()的每个终结符a，把A   加入M[A, a]<br>（3）如果在FIRST()中，对FOLLOW(A)的每个终结符b（包括$）, 把A  加入M[A, b]<br>（4）M的其它没有定义的条目都是error<h3 id="3-3-6-预测分析的错误恢复"><a href="#3-3-6-预测分析的错误恢复" class="headerlink" title="3.3.6 预测分析的错误恢复"></a>3.3.6 预测分析的错误恢复</h3></li>
+</ul>
+</li>
+<li>先对编译器的错误处理做一个概述 <ul>
+<li>词法错误，如标识符、关键字或算符的拼写错</li>
+<li>语法错误，如算术表达式的括号不配对</li>
+<li>语义错误，如算符作用于不相容的运算对象</li>
+<li>逻辑错误，如无穷的递归调用</li>
+</ul>
+</li>
+<li>分析器对错误处理的基本目标<ul>
+<li>清楚而准确地报告错误的出现</li>
+<li>迅速地从每个错误中恢复过来，以便诊断后面的错误，并尽量少出现伪错误</li>
+<li>它不应该使正确程序的处理速度降低太多</li>
+</ul>
+</li>
+<li>非递归预测分析在什么场合下发现错误<ul>
+<li>栈顶的终结符和下一个输入符号不匹配</li>
+<li>栈顶是非终结符A，输入符号是a，而M[A , a]是空白</li>
+</ul>
+</li>
+<li>非递归预测分析：采用紧急方式的错误恢复 <ul>
+<li>发现错误时，分析器每次抛弃一个输入记号，直到输入记号属于某个指定的同步记号集合为止</li>
+</ul>
+</li>
+<li>同步<ul>
+<li>词法分析器当前提供的记号流能构成的语法结构，正是语法分析器所期望的<h2 id="3-4-自下而上分析"><a href="#3-4-自下而上分析" class="headerlink" title="3.4 自下而上分析"></a>3.4 自下而上分析</h2><h3 id="3-4-1-归约"><a href="#3-4-1-归约" class="headerlink" title="3.4.1 归约"></a>3.4.1 归约</h3><h3 id="3-4-2-句柄"><a href="#3-4-2-句柄" class="headerlink" title="3.4.2 句柄"></a>3.4.2 句柄</h3></li>
+</ul>
+</li>
+<li>句型的句柄是和某产生式右部匹配的子串，并且，把它归约成该产生式左部的非终结符代表了最右推导过程的逆过程的一步</li>
+<li>句柄的右边仅含终结符，如果文法二义，那么句柄可能不唯一<h3 id="3-4-3-用栈实现移进-归约分析"><a href="#3-4-3-用栈实现移进-归约分析" class="headerlink" title="3.4.3 用栈实现移进-归约分析"></a>3.4.3 用栈实现移进-归约分析</h3>先通过移进-归约分析器在分析输入串id<sub>1</sub> *  id<sub>2</sub> + id<sub>3</sub>时的动作序列来了解移进-归约分析的工作方式<h3 id="3-4-4-移进-归约分析的冲突"><a href="#3-4-4-移进-归约分析的冲突" class="headerlink" title="3.4.4 移进-归约分析的冲突"></a>3.4.4 移进-归约分析的冲突</h3><h2 id="3-5-LR分析器"><a href="#3-5-LR分析器" class="headerlink" title="3.5 LR分析器"></a>3.5 LR分析器</h2></li>
+<li>特点<ul>
+<li>适用于一大类上下文无关文法</li>
+<li>效率高</li>
+</ul>
+</li>
+<li>主要介绍构造LR分析表的三种技术<ul>
+<li>简单的LR方法（简称SLR）</li>
+<li>规范的LR方法</li>
+<li>向前看的LR方法（简称LALR）<h3 id="3-5-1-LR分析算法"><a href="#3-5-1-LR分析算法" class="headerlink" title="3.5.1 LR分析算法"></a>3.5.1 LR分析算法</h3><h3 id="3-5-2-LR文法和LR分析方法的特点"><a href="#3-5-2-LR文法和LR分析方法的特点" class="headerlink" title="3.5.2 LR文法和LR分析方法的特点"></a>3.5.2 LR文法和LR分析方法的特点</h3></li>
+</ul>
+</li>
+<li>活前缀：右句型的前缀，该前缀不超过最右句柄的右端</li>
+<li>LR文法：我们能为之构造出所有条目都唯一的LR分析表</li>
+<li>LR分析方法的特点<ul>
+<li>栈中的文法符号总是形成一个活前缀</li>
+<li>分析表的转移函数本质上是识别活前缀的DFA</li>
+<li>栈顶的状态符号包含了确定句柄所需要的一切信息</li>
+<li>是已知的最一般的无回溯的移进归约方法</li>
+<li>能分析的文法类是预测分析法能分析的文法类的真超集</li>
+<li>能及时发现语法错误</li>
+<li>手工构造分析表的工作量太大<h3 id="3-5-3-构造SLR分析表"><a href="#3-5-3-构造SLR分析表" class="headerlink" title="3.5.3 构造SLR分析表"></a>3.5.3 构造SLR分析表</h3><h3 id="3-5-4-构造规范的LR分析表"><a href="#3-5-4-构造规范的LR分析表" class="headerlink" title="3.5.4 构造规范的LR分析表"></a>3.5.4 构造规范的LR分析表</h3><h3 id="3-5-5-构造LALR分析表"><a href="#3-5-5-构造LALR分析表" class="headerlink" title="3.5.5 构造LALR分析表"></a>3.5.5 构造LALR分析表</h3></li>
+</ul>
+</li>
+<li>合并同心项目集可能会引起冲突<ul>
+<li>同心集的合并不会引起新的移进归约冲突</li>
+<li>同心集的合并有可能产生新的归约归约冲突<h3 id="3-5-6-非LR的上下文无关结构"><a href="#3-5-6-非LR的上下文无关结构" class="headerlink" title="3.5.6 非LR的上下文无关结构"></a>3.5.6 非LR的上下文无关结构</h3></li>
+</ul>
+</li>
+<li>若自左向右扫描的移进-归约分析器能及时识别出现在栈顶的句柄，那么相应的文法就是LR的<h2 id="3-6-二义文法的应用"><a href="#3-6-二义文法的应用" class="headerlink" title="3.6 二义文法的应用"></a>3.6 二义文法的应用</h2>二义文法的特点：</li>
+<li>二义文法决不是LR文法</li>
+<li>简洁、自然</li>
+<li>可以用文法以外的信息来消除二义</li>
+<li>语法分析的效率高（基于消除二义后得到的分析表）<h3 id="3-6-1-使用文法以外信息来解决分析动作冲突"><a href="#3-6-1-使用文法以外信息来解决分析动作冲突" class="headerlink" title="3.6.1 使用文法以外信息来解决分析动作冲突"></a>3.6.1 使用文法以外信息来解决分析动作冲突</h3></li>
+</ul>
+<p>-二义文法：E → E + E | E * E | (E) | id<br>规定： *优先级高于+，两者都是左结合</p>
+<h3 id="3-6-2-特殊情况产生式引起的二义性"><a href="#3-6-2-特殊情况产生式引起的二义性" class="headerlink" title="3.6.2 特殊情况产生式引起的二义性"></a>3.6.2 特殊情况产生式引起的二义性</h3><h3 id="3-6-3-LR分析的错误恢复"><a href="#3-6-3-LR分析的错误恢复" class="headerlink" title="3.6.3 LR分析的错误恢复"></a>3.6.3 LR分析的错误恢复</h3><ul>
+<li>LR分析器在什么情况下发现错误<ul>
+<li>访问动作表时若遇到出错条目</li>
+<li>访问转移表时它决不会遇到出错条目</li>
+<li>决不会把不正确的后继移进栈</li>
+<li>规范的LR分析器甚至在报告错误之前决不做任何无效归约<h2 id="3-7-分析器的生成器"><a href="#3-7-分析器的生成器" class="headerlink" title="3.7 分析器的生成器"></a>3.7 分析器的生成器</h2><h3 id="3-7-1-分析器的生成器Yacc"><a href="#3-7-1-分析器的生成器Yacc" class="headerlink" title="3.7.1 分析器的生成器Yacc"></a>3.7.1 分析器的生成器Yacc</h3><h3 id="3-7-2-用Yacc处理二义文法"><a href="#3-7-2-用Yacc处理二义文法" class="headerlink" title="3.7.2 用Yacc处理二义文法"></a>3.7.2 用Yacc处理二义文法</h3><h3 id="3-7-3-Yacc的错误恢复"><a href="#3-7-3-Yacc的错误恢复" class="headerlink" title="3.7.3 Yacc的错误恢复"></a>3.7.3 Yacc的错误恢复</h3></li>
+</ul>
+</li>
+<li>编译器设计者的工作<ul>
+<li>决定哪些“主要的”非终结符将有错误恢复与它们相关联</li>
+<li>加入A → error α的错误产生式，其中A是主要非终结符，α是文法符号串</li>
+<li>为这样的产生式配上语义动作</li>
+</ul>
+</li>
+<li>Yacc把错误产生式当作普通产生式处理</li>
+<li>遇到语法错误时<ul>
+<li>从栈中弹出状态，直到发现栈顶状态的项目集包含形为A →·error α的项目为止</li>
+<li>把虚构的终结符error“移进”栈</li>
+<li>忽略若干输入符号，直至找到α，把α移进栈</li>
+<li>把error α归约为A，恢复正常分析</li>
+</ul>
+</li>
+</ul>
+
     </div>
 
     
@@ -248,13 +425,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/FOC.github.io/2022/04/07/blog-03/" rel="prev" title="词法分析">
-                  <i class="fa fa-chevron-left"></i> 词法分析
+                <a href="/FOC.github.io/2022/04/07/blog-03/" rel="prev" title="第二章 词法分析">
+                  <i class="fa fa-chevron-left"></i> 第二章 词法分析
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/FOC.github.io/2022/04/07/blog-05/" rel="next" title="语法制导的翻译">
-                  语法制导的翻译 <i class="fa fa-chevron-right"></i>
+                <a href="/FOC.github.io/2022/04/07/blog-05/" rel="next" title="第四章 语法制导的翻译">
+                  第四章 语法制导的翻译 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -286,6 +463,8 @@
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
+
+
     </div>
   </footer>
 
@@ -296,6 +475,8 @@
   
 
 
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/FOC.github.io/js/third-party/tags/mermaid.js"></script>
 
 
 
