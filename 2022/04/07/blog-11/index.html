@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/FOC.github.io/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/FOC.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/FOC.github.io/js/config.js"></script>
 
     <meta name="description" content="现代高性能处理器能够在一个指令周期内执行多个指令，相序的运行能快到什么程度?答案依赖于下面几个因素：(0)程序中潜在的并行:(2)处理器上可用的并行:(3)从申行程序提取并行的能力:(4)在给定的调度约束下发现最住并行调度的能力。如果一个程序中的所有运算高度地相互依赖，那么不管是硬件。中行电康东那不德使强序并行地快速运行。典型的非数值应用有许多国有的相关性，例部师的现市自市 多值楼于楼面的分支，它">
 <meta property="og:type" content="article">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="现代高性能处理器能够在一个指令周期内执行多个指令，相序的运行能快到什么程度?答案依赖于下面几个因素：(0)程序中潜在的并行:(2)处理器上可用的并行:(3)从申行程序提取并行的能力:(4)在给定的调度约束下发现最住并行调度的能力。如果一个程序中的所有运算高度地相互依赖，那么不管是硬件。中行电康东那不德使强序并行地快速运行。典型的非数值应用有许多国有的相关性，例部师的现市自市 多值楼于楼面的分支，它">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-07T01:22:49.000Z">
-<meta property="article:modified_time" content="2022-04-16T13:01:04.131Z">
+<meta property="article:modified_time" content="2022-05-15T04:45:36.947Z">
 <meta property="article:author" content="隋纪运">
 <meta property="article:tag" content="-介绍">
 <meta name="twitter:card" content="summary">
@@ -88,6 +88,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -96,11 +97,37 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/FOC.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/FOC.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/FOC.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/FOC.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/FOC.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/FOC.github.io/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
         
@@ -226,7 +253,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-16 21:01:04" itemprop="dateModified" datetime="2022-04-16T21:01:04+08:00">2022-04-16</time>
+      <time title="修改时间：2022-05-15 12:45:36" itemprop="dateModified" datetime="2022-05-15T12:45:36+08:00">2022-05-15</time>
     </span>
 
   
@@ -241,6 +268,8 @@
     <div class="post-body" itemprop="articleBody">
         <p>现代高性能处理器能够在一个指令周期内执行多个指令，相序的运行能快到什么程度?答案依赖于下面几个因素：<br>(0)程序中潜在的并行:<br>(2)处理器上可用的并行:<br>(3)从申行程序提取并行的能力:<br>(4)在给定的调度约束下发现最住并行调度的能力。<br>如果一个程序中的所有运算高度地相互依赖，那么不管是硬件。中行电康东那不德使强序并行地快速运行。典型的非数值应用有许多国有的相关性，例部师的现市自市 多值楼于楼面的分支，它们使得预测将要被执行的指令都变得非常困难，更不要.电号a单行执行 防强作。因此在该领域的研究集中在放宽调度约束，包插引人新的体系培内地话，是不范调定强本身。</p>
 <span id="more"></span>
+
+
     </div>
 
     
@@ -304,6 +333,8 @@
 <script src="/FOC.github.io/js/comments.js"></script><script src="/FOC.github.io/js/utils.js"></script><script src="/FOC.github.io/js/motion.js"></script><script src="/FOC.github.io/js/next-boot.js"></script>
 
   
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/FOC.github.io/js/third-party/search/local-search.js"></script>
 
 
   <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>

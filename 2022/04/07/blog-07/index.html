@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/FOC.github.io/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/FOC.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/FOC.github.io/js/config.js"></script>
 
     <meta name="description" content="过程和函数这样的程序单元统称为过程，程序运行时过程的一次执行称为过程的一次活动。过程的每次活动都需要可执行代码和存放所需数据的储存空间，所需的局部数据通常用一块连续的储存区来存放，称之为活动记录。过程p一次活动的生存期是从过程体开始执行到执行结束的时间，包括消耗在执行被p调用的过程所需的时间，以及再由这样的过程调用过程所花的时间等。">
 <meta property="og:type" content="article">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="过程和函数这样的程序单元统称为过程，程序运行时过程的一次执行称为过程的一次活动。过程的每次活动都需要可执行代码和存放所需数据的储存空间，所需的局部数据通常用一块连续的储存区来存放，称之为活动记录。过程p一次活动的生存期是从过程体开始执行到执行结束的时间，包括消耗在执行被p调用的过程所需的时间，以及再由这样的过程调用过程所花的时间等。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-07T01:22:18.000Z">
-<meta property="article:modified_time" content="2022-04-15T12:51:30.595Z">
+<meta property="article:modified_time" content="2022-05-14T16:29:01.887Z">
 <meta property="article:author" content="隋纪运">
 <meta property="article:tag" content="-介绍">
 <meta name="twitter:card" content="summary">
@@ -88,6 +88,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -96,11 +97,37 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/FOC.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/FOC.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/FOC.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/FOC.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/FOC.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/FOC.github.io/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
         
@@ -113,7 +140,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -126,6 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E5%B1%80%E9%83%A8%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5"><span class="nav-number">1.</span> <span class="nav-text">6.1 局部存储分配策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">6.1.1 过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-%E5%90%8D%E5%AD%97%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E7%BB%91%E5%AE%9A"><span class="nav-number">1.2.</span> <span class="nav-text">6.1.2 名字的作用域和绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-3-%E6%B4%BB%E5%8A%A8%E8%AE%B0%E5%BD%95"><span class="nav-number">1.3.</span> <span class="nav-text">6.1.3 活动记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-4-%E5%B1%80%E9%83%A8%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AE%89%E6%8E%92"><span class="nav-number">1.4.</span> <span class="nav-text">6.1.4 局部数据的安排</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-5-%E7%A8%8B%E5%BA%8F%E5%9D%97"><span class="nav-number">1.5.</span> <span class="nav-text">6.1.5 程序块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E5%85%A8%E5%B1%80%E5%AD%98%E5%82%A8%E5%88%86%E9%85%8D%E7%AD%96%E7%95%A5"><span class="nav-number">2.</span> <span class="nav-text">6.2 全局存储分配策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-1-%E8%BF%90%E8%A1%8C%E6%97%B6%E5%86%85%E5%AD%98%E7%9A%84%E5%88%92%E5%88%86"><span class="nav-number">2.1.</span> <span class="nav-text">6.2.1 运行时内存的划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-2-%E9%9D%99%E6%80%81%E5%88%86%E9%85%8D"><span class="nav-number">2.2.</span> <span class="nav-text">6.2.2 静态分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-3-%E6%A0%88%E5%BC%8F%E5%88%86%E9%85%8D"><span class="nav-number">2.3.</span> <span class="nav-text">6.2.3 栈式分配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-%E9%9D%9E%E5%B1%80%E9%83%A8%E5%90%8D%E5%AD%97%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="nav-number">3.</span> <span class="nav-text">6.3 非局部名字的访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-1-%E6%97%A0%E8%BF%87%E7%A8%8B%E5%B5%8C%E5%A5%97%E7%9A%84%E9%9D%99%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">3.1.</span> <span class="nav-text">6.3.1 无过程嵌套的静态作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-2-%E6%9C%89%E8%BF%87%E7%A8%8B%E5%B5%8C%E5%A5%97%E7%9A%84%E9%9D%99%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">3.2.</span> <span class="nav-text">6.3.2 有过程嵌套的静态作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-3-%E5%8A%A8%E6%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">3.3.</span> <span class="nav-text">6.3.3 动态作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-2-%E5%BC%95%E7%94%A8%E8%B0%83%E7%94%A8"><span class="nav-number">3.4.</span> <span class="nav-text">6.4.2 引用调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-3-%E5%A4%8D%E5%86%99-%E6%81%A2%E5%A4%8D%E8%B0%83%E7%94%A8"><span class="nav-number">3.5.</span> <span class="nav-text">6.4.3 复写-恢复调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-4-%E6%8D%A2%E5%90%8D%E8%B0%83%E7%94%A8"><span class="nav-number">3.6.</span> <span class="nav-text">6.4.4 换名调用</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -226,7 +254,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-15 20:51:30" itemprop="dateModified" datetime="2022-04-15T20:51:30+08:00">2022-04-15</time>
+      <time title="修改时间：2022-05-15 00:29:01" itemprop="dateModified" datetime="2022-05-15T00:29:01+08:00">2022-05-15</time>
     </span>
 
   
@@ -241,6 +269,108 @@
     <div class="post-body" itemprop="articleBody">
         <p>过程和函数这样的程序单元统称为过程，程序运行时过程的一次执行称为过程的一次活动。过程的每次活动都需要可执行代码和存放所需数据的储存空间，所需的局部数据通常用一块连续的储存区来存放，称之为活动记录。过程p一次活动的生存期是从过程体开始执行到执行结束的时间，包括消耗在执行被p调用的过程所需的时间，以及再由这样的过程调用过程所花的时间等。</p>
 <span id="more"></span>
+
+<ul>
+<li>过程的活动<br>  过程的一次执行称为过程的一次活动</li>
+<li>活动记录<br>  过程的活动需要可执行代码和存放所需信息的存储空间,后者称为活动记录</li>
+<li>影响存储分配策略的语言特征 <ul>
+<li>过程能否递归</li>
+<li>当控制从过程的活动返回时，局部变量的值是否要保留</li>
+<li>过程能否访问非局部变量</li>
+<li>过程调用的参数传递方式</li>
+<li>过程能否作为参数被传递</li>
+<li>过程能否作为结果值传递</li>
+<li>存储块能否在程序控制下动态地分配</li>
+<li>存储块是否必须显式地释放<h2 id="6-1-局部存储分配策略"><a href="#6-1-局部存储分配策略" class="headerlink" title="6.1 局部存储分配策略"></a>6.1 局部存储分配策略</h2><h3 id="6-1-1-过程"><a href="#6-1-1-过程" class="headerlink" title="6.1.1 过程"></a>6.1.1 过程</h3>过程定义、过程调用、形式参数、实在参数、活动的生存期<h3 id="6-1-2-名字的作用域和绑定"><a href="#6-1-2-名字的作用域和绑定" class="headerlink" title="6.1.2 名字的作用域和绑定"></a>6.1.2 名字的作用域和绑定</h3>名字的作用域</li>
+</ul>
+</li>
+<li>一个声明起作用的程序部分称为该声明的作用域</li>
+<li>即使一个名字在程序中只声明一次，该名字在程序运行时也可能表示不同的数据对象<h3 id="6-1-3-活动记录"><a href="#6-1-3-活动记录" class="headerlink" title="6.1.3 活动记录"></a>6.1.3 活动记录</h3><h3 id="6-1-4-局部数据的安排"><a href="#6-1-4-局部数据的安排" class="headerlink" title="6.1.4 局部数据的安排"></a>6.1.4 局部数据的安排</h3></li>
+<li>字节是可编址内存的最小单位</li>
+<li>变量所需的存储空间可以根据其类型而静态确定</li>
+<li>一个过程所声明的局部变量，按这些变量声明时出现的次序，在局部数据域中依次分配空间</li>
+<li>局部数据的地址可以用相对于某个位置的地址来表示</li>
+<li>数据对象的存储安排还有一个对齐问题<h3 id="6-1-5-程序块"><a href="#6-1-5-程序块" class="headerlink" title="6.1.5 程序块"></a>6.1.5 程序块</h3></li>
+<li>本身含有局部变量声明的语句</li>
+<li>可以嵌套</li>
+<li>最接近的嵌套作用域规则</li>
+<li>并列程序块不会同时活跃</li>
+<li>并列程序块的变量可以重叠分配<h2 id="6-2-全局存储分配策略"><a href="#6-2-全局存储分配策略" class="headerlink" title="6.2 全局存储分配策略"></a>6.2 全局存储分配策略</h2></li>
+<li>介绍程序运行时所需的各个活动记录在存储空间的分配策略</li>
+<li>描述过程的目标代码怎样访问绑定到局部名字的存储单元</li>
+<li>介绍三种分配策略<ul>
+<li>静态分配策略</li>
+<li>栈式分配策略</li>
+<li>堆式分配策略<h3 id="6-2-1-运行时内存的划分"><a href="#6-2-1-运行时内存的划分" class="headerlink" title="6.2.1 运行时内存的划分"></a>6.2.1 运行时内存的划分</h3><h3 id="6-2-2-静态分配"><a href="#6-2-2-静态分配" class="headerlink" title="6.2.2 静态分配"></a>6.2.2 静态分配</h3></li>
+</ul>
+</li>
+<li>名字在程序被编译时绑定到存储单元，不需要运行时的任何支持</li>
+<li>绑定的生存期是程序的整个运行期间</li>
+<li>控制再次进入该过程时，局部变量的值和控制上一次离开时的一样</li>
+<li>每个活动记录的大小是固定的</li>
+<li>过程调用时保存信息的地址在编译时也是已知的</li>
+<li>静态分配给语言带来限制<ul>
+<li>递归过程不被允许</li>
+<li>数据对象的长度和它在内存中位置的限制，必须是在编译时可以知道的</li>
+<li>数据结构不能动态建立<h3 id="6-2-3-栈式分配"><a href="#6-2-3-栈式分配" class="headerlink" title="6.2.3 栈式分配"></a>6.2.3 栈式分配</h3></li>
+</ul>
+</li>
+<li>活动树的特点<ul>
+<li>每个结点代表某过程的一个活动</li>
+<li>根结点代表主程序的活动</li>
+<li>结点a是结点b的父结点，当且仅当控制流从a的活动进入b的活动</li>
+<li>结点a处于结点b的左边，当且仅当a的生存期先于b的生存期</li>
+</ul>
+</li>
+<li>运行栈：把控制栈中的信息拓广到包括过程活动所需的所有局部信息（即活动记录） </li>
+<li>过程调用和过程返回都需要执行一些代码来管理活动记录栈，保存或恢复机器状态等</li>
+<li>过程调用序列<br>  过程调用时执行的分配活动记录，把信息填入它的域中的代码</li>
+<li>过程返回序列<br>  过程返回时执行的恢复机器状态，释放活动记录，使调用过程能够继续执行的代码</li>
+<li>调用序列和返回序列常常都分成两部分，分处于调用过程和被调用过程中</li>
+<li>即使是同一种语言，过程调用序列、返回序列和活动记录中各域的排放次序，也会因实现而异</li>
+<li>设计这些序列和活动记录的一些原则是<ul>
+<li>以活动记录中间的某个位置作为基地址</li>
+<li>长度能较早确定的域放在活动记录的中间</li>
+<li>一般把临时数据域放在局部数据域的后面</li>
+<li>把参数域和可能有的返回值域放在紧靠调用者活动记录的地方</li>
+<li>用同样的代码来执行各个活动的保存和恢复</li>
+</ul>
+</li>
+<li>活动记录的长度在编译时不能确定的情况<ul>
+<li>局部数组的大小要等到过程激活时才能确定</li>
+<li>在活动记录中为这样的数组分别存放数组指针的单元</li>
+<li>运行时，这些指针指向分配在栈顶的存储空间<h2 id="6-3-非局部名字的访问"><a href="#6-3-非局部名字的访问" class="headerlink" title="6.3 非局部名字的访问"></a>6.3 非局部名字的访问</h2><h3 id="6-3-1-无过程嵌套的静态作用域"><a href="#6-3-1-无过程嵌套的静态作用域" class="headerlink" title="6.3.1 无过程嵌套的静态作用域"></a>6.3.1 无过程嵌套的静态作用域</h3></li>
+</ul>
+</li>
+<li>过程体中的非局部引用可以直接使用静态确定的地址</li>
+<li>局部变量在栈顶的活动记录中，可以通过base_sp指针来访问</li>
+<li>无须深入栈中取数据，无须访问链</li>
+<li>过程可以作为参数来传递，也可以作为结果来返回<h3 id="6-3-2-有过程嵌套的静态作用域"><a href="#6-3-2-有过程嵌套的静态作用域" class="headerlink" title="6.3.2 有过程嵌套的静态作用域"></a>6.3.2 有过程嵌套的静态作用域</h3><h3 id="6-3-3-动态作用域"><a href="#6-3-3-动态作用域" class="headerlink" title="6.3.3 动态作用域"></a>6.3.3 动态作用域</h3></li>
+<li>被调用过程的非局部名字a和它在调用过程中引用的是同样的存储单元</li>
+<li>新的绑定仅为被调用过程的局部名字建立，这些名字在被调用过程的活动记录中占用的存储单元</li>
+<li>实现动态作用域的方法<ul>
+<li>深访问<br>  用控制链搜索运行栈，寻找包含该非局部名字的第一个活动记录</li>
+<li>浅访问<ul>
+<li>为每个名字在静态分配的存储空间中保存它的当前值</li>
+<li>当过程p的新活动出现时，p的局部名字n使用在静态数据区分配给n的存储单元。n的先前值可以保存在p的活动记录中，当p的活动结束时再恢复<h3 id="6-4-2-引用调用"><a href="#6-4-2-引用调用" class="headerlink" title="6.4.2 引用调用"></a>6.4.2 引用调用</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实参的左值传给被调用过程 </li>
+<li>引用调用可以如下实现：<ul>
+<li>把实参的左值放入形参的存储单元</li>
+<li>在被调用过程的目标代码中，任何对形参的引用都是通过传给该过程的指针来间接引用实参的<h3 id="6-4-3-复写-恢复调用"><a href="#6-4-3-复写-恢复调用" class="headerlink" title="6.4.3 复写-恢复调用"></a>6.4.3 复写-恢复调用</h3></li>
+</ul>
+</li>
+<li>值调用和引用调用的混合</li>
+<li>复写-恢复调用可以如下实现：<ul>
+<li>实参的右值和左值同时传给被调用过程</li>
+<li>在被调用过程中，像值调用那样使用实参的右值</li>
+<li>当控制返回调用过程时，根据传递来的实参的左值，将形参当前的值复写到实参存储单元<h3 id="6-4-4-换名调用"><a href="#6-4-4-换名调用" class="headerlink" title="6.4.4 换名调用"></a>6.4.4 换名调用</h3></li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -305,6 +435,8 @@
 <script src="/FOC.github.io/js/comments.js"></script><script src="/FOC.github.io/js/utils.js"></script><script src="/FOC.github.io/js/motion.js"></script><script src="/FOC.github.io/js/next-boot.js"></script>
 
   
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/FOC.github.io/js/third-party/search/local-search.js"></script>
 
 
   <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>

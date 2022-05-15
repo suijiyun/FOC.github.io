@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/FOC.github.io/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/FOC.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/FOC.github.io/js/config.js"></script>
 
     <meta name="description" content="软件系统的规模越来越大，并且日趋复杂，以更有效和更透明的方法来开发这样的系统的呼声与日俱增。最终的目标是从已做好的标准构件去构造软件系统，就像现在构造硬件系统那样。模块化、模块的可重用性.模块的可扩充性和抽象性是朝向这个目标的些会试，面 面向对象话言在这些方面提供了一种新的可能性。 现在，面向对象已被看成管理复杂教件系统的一种重要风范。">
 <meta property="og:type" content="article">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="软件系统的规模越来越大，并且日趋复杂，以更有效和更透明的方法来开发这样的系统的呼声与日俱增。最终的目标是从已做好的标准构件去构造软件系统，就像现在构造硬件系统那样。模块化、模块的可重用性.模块的可扩充性和抽象性是朝向这个目标的些会试，面 面向对象话言在这些方面提供了一种新的可能性。 现在，面向对象已被看成管理复杂教件系统的一种重要风范。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-07T01:23:04.000Z">
-<meta property="article:modified_time" content="2022-04-16T13:04:36.834Z">
+<meta property="article:modified_time" content="2022-05-15T12:37:32.770Z">
 <meta property="article:author" content="隋纪运">
 <meta property="article:tag" content="-介绍">
 <meta name="twitter:card" content="summary">
@@ -88,6 +88,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -96,11 +97,37 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/FOC.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/FOC.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/FOC.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/FOC.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/FOC.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/FOC.github.io/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
         
@@ -113,7 +140,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -126,6 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AF%AD%E8%A8%80%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">12.1 面向对象语言的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1-1-%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%B1%BB"><span class="nav-number">1.1.</span> <span class="nav-text">12.1.1 对象和对象类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1-2-%E7%BB%A7%E6%89%BF"><span class="nav-number">1.2.</span> <span class="nav-text">12.1.2 继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1-3-%E4%BF%A1%E6%81%AF%E5%B0%81%E8%A3%85"><span class="nav-number">1.3.</span> <span class="nav-text">12.1.3 信息封装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-2-%E6%96%B9%E6%B3%95%E7%9A%84%E7%BC%96%E8%AF%91"><span class="nav-number">2.</span> <span class="nav-text">12.2  方法的编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-3-%E7%BB%A7%E6%89%BF%E7%9A%84%E7%BC%96%E8%AF%91%E6%96%B9%E6%A1%88"><span class="nav-number">3.</span> <span class="nav-text">12.3  继承的编译方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#12-3-1-%E5%8D%95%E4%B8%80%E7%BB%A7%E6%89%BF%E7%9A%84%E7%BC%96%E8%AF%91%E6%96%B9%E6%A1%88"><span class="nav-number">3.1.</span> <span class="nav-text">12.3.1 单一继承的编译方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-3-2-%E9%87%8D%E5%A4%8D%E7%BB%A7%E6%89%BF%E7%9A%84%E7%BC%96%E8%AF%91%E6%96%B9%E6%A1%88"><span class="nav-number">3.2.</span> <span class="nav-text">12.3.2 重复继承的编译方案</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -226,7 +254,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-16 21:04:36" itemprop="dateModified" datetime="2022-04-16T21:04:36+08:00">2022-04-16</time>
+      <time title="修改时间：2022-05-15 20:37:32" itemprop="dateModified" datetime="2022-05-15T20:37:32+08:00">2022-05-15</time>
     </span>
 
   
@@ -241,6 +269,56 @@
     <div class="post-body" itemprop="articleBody">
         <p>软件系统的规模越来越大，并且日趋复杂，以更有效和更透明的方法来开发这样的系统的呼声与日俱增。最终的目标是从已做好的标准构件去构造软件系统，就像现在构造硬件系统那样。模块化、模块的可重用性.模块的可扩充性和抽象性是朝向这个目标的些会试，面 面向对象话言在这些方面提供了一种新的可能性。 现在，面向对象已被看成管理复杂教件系统的一种重要风范。</p>
 <span id="more"></span>
+
+<h2 id="12-1-面向对象语言的概念"><a href="#12-1-面向对象语言的概念" class="headerlink" title="12.1 面向对象语言的概念"></a>12.1 面向对象语言的概念</h2><h3 id="12-1-1-对象和对象类"><a href="#12-1-1-对象和对象类" class="headerlink" title="12.1.1 对象和对象类"></a>12.1.1 对象和对象类</h3><ul>
+<li>对象<ul>
+<li>由一组属性和操作于这组属性的过程组成</li>
+<li>属性到值的映射称为对象的状态 ，过程称为方法</li>
+</ul>
+</li>
+<li>对象类<ul>
+<li>一类对象的总称，规范了该类中对象的属性和方法，包括它们的类型和原型</li>
+<li>对象有自己存放属性的存储单元；对象可以共享方法的代码</li>
+<li>对象类形成了面向对象语言的模块单元</li>
+<li>下面我们将把术语“类”和“类型”看成是同义的<h3 id="12-1-2-继承"><a href="#12-1-2-继承" class="headerlink" title="12.1.2 继承"></a>12.1.2 继承</h3></li>
+</ul>
+</li>
+<li>继承<ul>
+<li>基类、派生类、子类、抽象类</li>
+<li>子类型规则<br>  当某个类型的一个对象在某个输入位置被需要或作为函数的返回值时，其任何子类型的对象允许出现在这些地方。</li>
+<li>类B的一个对象，若它不同时是B的某个真子类的对象，那么称该对象是B的真对象，称B是该对象的运行时类型</li>
+</ul>
+</li>
+<li>方法选择规则<br>  如果类B继承类A并且重写了方法m，那么对类B的对象b来说, 即使它作为类A的对象使用, 也必须使用在类B中定义的方法m<h3 id="12-1-3-信息封装"><a href="#12-1-3-信息封装" class="headerlink" title="12.1.3 信息封装"></a>12.1.3 信息封装</h3></li>
+<li>大多数面向对象语言提供了一种机制，它可用来将类的特征分成私有的和公共的</li>
+<li>某些面向对象语言用不同的上下文区分作用域，如“在一个类中”、“在派生类中”、“在友元类中”等等</li>
+<li>由编译器来实现这些作用域规则是简单而又明显的<h2 id="12-2-方法的编译"><a href="#12-2-方法的编译" class="headerlink" title="12.2  方法的编译"></a>12.2  方法的编译</h2>将一个C++语言的类翻译成C语言的程序段，主要工作有如下几点(由继承引出的问题暂不考虑)</li>
+<li>将C++语言中一个类的所有非静态属性构成一个C语言的结构类型，取类的名字作为结构类型的名字</li>
+<li>类的静态属性是该类的所有对象所共有的,应当翻译成C中的全局变量，但是需要改一个名字</li>
+<li>C++语言中类的对象声明不加翻译就成了C语言中相应结构类型的变量声明</li>
+<li>将C++语言中类的非静态方法翻译成C语言的函数，对应的方法和函数的区别有下面几点：<ul>
+<li>函数的名字必须在原来方法名的基础上修改</li>
+<li>函数声明增加一个形参this</li>
+<li>在函数体中出现的函数调用也要增加一个实参</li>
+<li>在方法中对本对象的非静态属性的访问，改成对this相应域的访问。在方法中对其它对象的非静态属性的访问不必修改</li>
+</ul>
+</li>
+<li>类的静态方法在定义和调用的地方都需要改名<h2 id="12-3-继承的编译方案"><a href="#12-3-继承的编译方案" class="headerlink" title="12.3  继承的编译方案"></a>12.3  继承的编译方案</h2></li>
+<li>如果类B直接或间接继承类A，类B的对象可以用在几乎所有类A的对象可用的地方。</li>
+<li>为了使类B的对象可以作为类A的对象使用，编译器必须能以一种有效的方式产生类B的对象的A视图。</li>
+<li>由于类A的虚方法可以在类B中被重写，我们又需要B视图能够有效地从A视图产生。这样，编译器要求类的对象具有某种灵活的结构。 <h3 id="12-3-1-单一继承的编译方案"><a href="#12-3-1-单一继承的编译方案" class="headerlink" title="12.3.1 单一继承的编译方案"></a>12.3.1 单一继承的编译方案</h3></li>
+<li>必须解释编译器是怎样有效地实现动态绑定的</li>
+<li>编译器为每个类建立一个方法表，它们包含一个类或它的超类中所有定义为virtual的方法的入口</li>
+<li>每个对象在C程序中有对应的结构，现在为这样的结构增加一个域，该域是方法表的指针</li>
+<li>继承类方法表的产生：首先拷贝基类的方法表,被重新定义的方法由新的定义覆盖；然后，新引入的方法被追加到这张表上<h3 id="12-3-2-重复继承的编译方案"><a href="#12-3-2-重复继承的编译方案" class="headerlink" title="12.3.2 重复继承的编译方案"></a>12.3.2 重复继承的编译方案</h3></li>
+<li>重复继承对语言定义和编译器设计来说，都具有很大的挑战性</li>
+<li>B1和B2间的冲突与矛盾</li>
+<li>重复继承<ul>
+<li>可以有多个实例</li>
+<li>只能有一个实例</li>
+</ul>
+</li>
+</ul>
 
     </div>
 
@@ -305,6 +383,8 @@
 <script src="/FOC.github.io/js/comments.js"></script><script src="/FOC.github.io/js/utils.js"></script><script src="/FOC.github.io/js/motion.js"></script><script src="/FOC.github.io/js/next-boot.js"></script>
 
   
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/FOC.github.io/js/third-party/search/local-search.js"></script>
 
 
   <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>

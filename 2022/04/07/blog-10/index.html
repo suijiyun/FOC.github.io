@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/FOC.github.io/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/FOC.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/FOC.github.io/js/config.js"></script>
 
     <meta name="description" content="如果简单地把高级语言的每个构造独立地制评由在编译过程中，通过删除目标代码成机器代代码，那么这种用速度较快种方式会中引起较大的话换井完成同中同代营较慢的代码序列等变换来降低所生成代码的运行行开销，.势之为代母事情的代码">
 <meta property="og:type" content="article">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="如果简单地把高级语言的每个构造独立地制评由在编译过程中，通过删除目标代码成机器代代码，那么这种用速度较快种方式会中引起较大的话换井完成同中同代营较慢的代码序列等变换来降低所生成代码的运行行开销，.势之为代母事情的代码">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-07T01:22:41.000Z">
-<meta property="article:modified_time" content="2022-04-16T12:59:06.072Z">
+<meta property="article:modified_time" content="2022-05-15T04:43:00.694Z">
 <meta property="article:author" content="隋纪运">
 <meta property="article:tag" content="-介绍">
 <meta name="twitter:card" content="summary">
@@ -88,6 +88,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -96,11 +97,37 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/FOC.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/FOC.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/FOC.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/FOC.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/FOC.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/FOC.github.io/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
         
@@ -113,7 +140,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -126,6 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-%E4%BC%98%E5%8C%96%E7%9A%84%E4%B8%BB%E8%A6%81%E7%A7%8D%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">9.1 优化的主要种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-1-%E4%BB%A3%E7%A0%81%E6%94%B9%E8%BF%9B%E5%8F%98%E6%8D%A2%E7%9A%84%E6%A0%87%E5%87%86"><span class="nav-number">1.1.</span> <span class="nav-text">9.1.1 代码改进变换的标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-2-%E5%85%AC%E5%85%B1%E5%AD%90%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%88%A0%E9%99%A4"><span class="nav-number">1.2.</span> <span class="nav-text">9.1.2 公共子表达式删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-3-%E5%A4%8D%E5%86%99%E4%BC%A0%E6%92%AD"><span class="nav-number">1.3.</span> <span class="nav-text">9.1.3 复写传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-4-%E6%AD%BB%E4%BB%A3%E7%A0%81%E5%88%A0%E9%99%A4"><span class="nav-number">1.4.</span> <span class="nav-text">9.1.4 死代码删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-5-%E4%BB%A3%E7%A0%81%E5%A4%96%E6%8F%90"><span class="nav-number">1.5.</span> <span class="nav-text">9.1.5 代码外提</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-6-%E5%BC%BA%E5%BA%A6%E5%89%8A%E5%BC%B1%E5%92%8C%E5%BD%92%E7%BA%B3%E5%8F%98%E9%87%8F%E5%88%A0%E9%99%A4"><span class="nav-number">1.6.</span> <span class="nav-text">9.1.6 强度削弱和归纳变量删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-7-%E4%BC%98%E5%8C%96%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E7%BB%84%E7%BB%87"><span class="nav-number">1.7.</span> <span class="nav-text">9.1.7 优化编译器的组织</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-%E6%B5%81%E5%9B%BE%E4%B8%AD%E7%9A%84%E5%BE%AA%E7%8E%AF"><span class="nav-number">2.</span> <span class="nav-text">9.2 流图中的循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-1-%E5%BF%85%E7%BB%8F%E7%BB%93%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">9.2.1 必经结点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-2-%E8%87%AA%E7%84%B6%E5%BE%AA%E7%8E%AF"><span class="nav-number">2.2.</span> <span class="nav-text">9.2.2 自然循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-3-%E5%89%8D%E7%BD%AE%E7%BB%93%E7%82%B9"><span class="nav-number">2.3.</span> <span class="nav-text">9.2.3 前置结点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-4-%E5%8F%AF%E5%BD%92%E7%BA%B3%E6%B5%81%E5%9B%BE"><span class="nav-number">2.4.</span> <span class="nav-text">9.2.4 可归纳流图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E6%B5%81%E5%88%86%E6%9E%90%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">9.3 全局数据流分析介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-1-%E7%82%B9%E5%92%8C%E8%B7%AF%E5%BE%84"><span class="nav-number">3.1.</span> <span class="nav-text">9.3.1 点和路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-2-%E5%88%B0%E8%BE%BE-%E5%AE%9A%E5%80%BC"><span class="nav-number">3.2.</span> <span class="nav-text">9.3.2 到达-定值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-3-%E5%8F%AF%E7%94%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.3.</span> <span class="nav-text">9.3.3 可用表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-4-%E6%B4%BB%E8%B7%83%E5%8F%98%E9%87%8F%E5%88%86%E6%9E%90"><span class="nav-number">3.4.</span> <span class="nav-text">9.3.4 活跃变量分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-4-%E4%BB%A3%E7%A0%81%E6%94%B9%E8%BF%9B%E5%8F%98%E6%8D%A2"><span class="nav-number">4.</span> <span class="nav-text">9.4 代码改进变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-1-%E5%85%AC%E5%85%B1%E5%AD%90%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%88%A0%E9%99%A4"><span class="nav-number">4.1.</span> <span class="nav-text">9.4.1 公共子表达式删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-2-%E5%A4%8D%E5%86%99%E4%BC%A0%E6%92%AD"><span class="nav-number">4.2.</span> <span class="nav-text">9.4.2 复写传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-3-%E5%AF%BB%E6%89%BE%E5%BE%AA%E7%8E%AF%E4%B8%8D%E5%8F%98%E8%AE%A1%E7%AE%97"><span class="nav-number">4.3.</span> <span class="nav-text">9.4.3 寻找循环不变计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-4-%E4%BB%A3%E7%A0%81%E5%A4%96%E6%8F%90"><span class="nav-number">4.4.</span> <span class="nav-text">9.4.4 代码外提</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-5-%E5%BD%92%E7%BA%B3%E5%8F%98%E9%87%8F%E5%88%A0%E9%99%A4"><span class="nav-number">4.5.</span> <span class="nav-text">9.4.5 归纳变量删除</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -226,7 +254,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-16 20:59:06" itemprop="dateModified" datetime="2022-04-16T20:59:06+08:00">2022-04-16</time>
+      <time title="修改时间：2022-05-15 12:43:00" itemprop="dateModified" datetime="2022-05-15T12:43:00+08:00">2022-05-15</time>
     </span>
 
   
@@ -241,6 +269,101 @@
     <div class="post-body" itemprop="articleBody">
         <p>如果简单地把高级语言的每个构造独立地制评由在编译过程中，通过删除目标代码成机器代代码，那么这种用速度较快种方式会中引起较大的话换井完成同中同代营较慢的代码序列等变换来降低所生成代码的运行行开销，.势之为代母事情的代码</p>
 <span id="more"></span>
+<p>通过程序变换（局部变换和全局变换）来改进程序，称为优化</p>
+<ul>
+<li>介绍独立于机器的优化，即不考虑任何依赖目标机器性质的优化变换</li>
+<li>流图中循环的识别</li>
+<li>数据流分析</li>
+<li>代码改进变换<h2 id="9-1-优化的主要种类"><a href="#9-1-优化的主要种类" class="headerlink" title="9.1 优化的主要种类"></a>9.1 优化的主要种类</h2><h3 id="9-1-1-代码改进变换的标准"><a href="#9-1-1-代码改进变换的标准" class="headerlink" title="9.1.1 代码改进变换的标准"></a>9.1.1 代码改进变换的标准</h3></li>
+<li>代码变换必须保程序的含义</li>
+<li>采取安全稳妥的策略</li>
+<li>变换减少程序的运行时间平均达到一个可度量的值</li>
+<li>变换所作的努力是值得的<h3 id="9-1-2-公共子表达式删除"><a href="#9-1-2-公共子表达式删除" class="headerlink" title="9.1.2 公共子表达式删除"></a>9.1.2 公共子表达式删除</h3><h3 id="9-1-3-复写传播"><a href="#9-1-3-复写传播" class="headerlink" title="9.1.3 复写传播"></a>9.1.3 复写传播</h3>形成为f :&#x3D; g的赋值叫做复写语句，优化过程中会大量引入复写，复写传播变换的做法是在复写语句f :&#x3D; g后，尽可能用g代表f。复写传播变换本身并不是优化，但它给其它优化带来机会：<ul>
+<li>常量合并</li>
+<li>死代码删除<h3 id="9-1-4-死代码删除"><a href="#9-1-4-死代码删除" class="headerlink" title="9.1.4 死代码删除"></a>9.1.4 死代码删除</h3></li>
+</ul>
+</li>
+<li>死代码是指计算的结果决不被引用的语句</li>
+<li>一些优化变换可能会引起死代码<h3 id="9-1-5-代码外提"><a href="#9-1-5-代码外提" class="headerlink" title="9.1.5 代码外提"></a>9.1.5 代码外提</h3></li>
+<li>代码外提是循环优化的一种</li>
+<li>循环优化的其它重要技术<ul>
+<li>归纳变量删除</li>
+<li>强度削弱<h3 id="9-1-6-强度削弱和归纳变量删除"><a href="#9-1-6-强度削弱和归纳变量删除" class="headerlink" title="9.1.6 强度削弱和归纳变量删除"></a>9.1.6 强度削弱和归纳变量删除</h3><h3 id="9-1-7-优化编译器的组织"><a href="#9-1-7-优化编译器的组织" class="headerlink" title="9.1.7 优化编译器的组织"></a>9.1.7 优化编译器的组织</h3></li>
+</ul>
+</li>
+<li>实现高级结构的操作在中间代码中是显式的</li>
+<li>中间代码基本上独立于目标机器<h2 id="9-2-流图中的循环"><a href="#9-2-流图中的循环" class="headerlink" title="9.2 流图中的循环"></a>9.2 流图中的循环</h2><h3 id="9-2-1-必经结点"><a href="#9-2-1-必经结点" class="headerlink" title="9.2.1 必经结点"></a>9.2.1 必经结点</h3></li>
+<li>结点d是结点n的必经结点，如果从初始结点起，每条到达n的路径都要经过d，写成d dom n</li>
+<li>每个结点是它本身的必经结点 </li>
+<li>循环的入口是循环中所有结点的必经结点 <h3 id="9-2-2-自然循环"><a href="#9-2-2-自然循环" class="headerlink" title="9.2.2 自然循环"></a>9.2.2 自然循环</h3></li>
+<li>循环<ul>
+<li>循环必须有唯一的入口点，叫做首结点，首结点是循环中所有结点的必经结点</li>
+<li>至少有一种办法重复循环，也就是至少有一条路径回到首结点</li>
+</ul>
+</li>
+<li>回边<ul>
+<li>如果有a dom b ，那么边b → a叫做回边</li>
+<li>寻找流图中所有循环的一个办法是找出流图的回边</li>
+</ul>
+</li>
+<li>自然循环</li>
+<li>内循环<ul>
+<li>若一个循环的结点集合是另一个循环的结点集合的子集。<h3 id="9-2-3-前置结点"><a href="#9-2-3-前置结点" class="headerlink" title="9.2.3 前置结点"></a>9.2.3 前置结点</h3>某些变换要求我们移动语句到首结点的前面<h3 id="9-2-4-可归纳流图"><a href="#9-2-4-可归纳流图" class="headerlink" title="9.2.4 可归纳流图"></a>9.2.4 可归纳流图</h3></li>
+</ul>
+</li>
+<li>一个流图G是可归约的，当且仅当</li>
+<li>有向边集合&#x3D;正向边子集回边子集，并有性质:<ul>
+<li>正向边子集形成有向无环图，在这个图中，每个结点可以从G的初始结点到达</li>
+<li>回边子集仅由前面所讲的回边组成</li>
+</ul>
+</li>
+<li>非归约流图<h2 id="9-3-全局数据流分析介绍"><a href="#9-3-全局数据流分析介绍" class="headerlink" title="9.3 全局数据流分析介绍"></a>9.3 全局数据流分析介绍</h2></li>
+<li>编译器需要把程序流图作为一个整体来收集信息</li>
+<li>并把这些信息分配给流图的各个基本块</li>
+<li>数据流信息可以通过建立和解数据流方程来收集<h3 id="9-3-1-点和路径"><a href="#9-3-1-点和路径" class="headerlink" title="9.3.1 点和路径"></a>9.3.1 点和路径</h3></li>
+<li>点<ul>
+<li>基本块中，两个相邻的语句之间为程序的一个点</li>
+<li>基本块的开始点和结束点</li>
+</ul>
+</li>
+<li>路径<ul>
+<li>点序列p1, p2, …, pn，对1和n - 1间的每个i，满足</li>
+<li>pi是先于一个语句的点，pi＋1是同一块中位于该语句后的点，或者</li>
+<li>pi是某块的结束点，pi＋1是后继块的开始点<h3 id="9-3-2-到达-定值"><a href="#9-3-2-到达-定值" class="headerlink" title="9.3.2 到达-定值"></a>9.3.2 到达-定值</h3></li>
+</ul>
+</li>
+<li>确切定值：赋值语句或读语句</li>
+<li>可能定值：过程调用,别名,通过指针来赋值</li>
+<li>确切引用</li>
+<li>可能引用</li>
+<li>在给出简单的例子加以区别后，我们将不考虑过程调用、别名、通过指针来赋值等引起不确定性的情况。<h3 id="9-3-3-可用表达式"><a href="#9-3-3-可用表达式" class="headerlink" title="9.3.3 可用表达式"></a>9.3.3 可用表达式</h3><h3 id="9-3-4-活跃变量分析"><a href="#9-3-4-活跃变量分析" class="headerlink" title="9.3.4 活跃变量分析"></a>9.3.4 活跃变量分析</h3>x的值在p点开始的路径上被引用，我们说x在p点活跃，否则称x在p点是死亡的<h2 id="9-4-代码改进变换"><a href="#9-4-代码改进变换" class="headerlink" title="9.4 代码改进变换"></a>9.4 代码改进变换</h2>依赖于上节收集的数据流信息进行代码改进变换，有些变换可以一起完成，但这里是逐个讨论，代替不了局部变换。<h3 id="9-4-1-公共子表达式删除"><a href="#9-4-1-公共子表达式删除" class="headerlink" title="9.4.1 公共子表达式删除"></a>9.4.1 公共子表达式删除</h3>对每个s:  x :&#x3D; y + z，若y + z 在块的开始点可用,在s前没有y或z的定值，则执行下面的步骤：<ul>
+<li>从该块开始反向搜索，找出到达该块开始点的y + z的计算</li>
+<li>建立新变量u</li>
+<li>把上面找到的每个语句w :&#x3D; y + z改成<br>  u :&#x3D; y + z<br>  w :&#x3D; u</li>
+<li>用x :&#x3D; u代替语句s<h3 id="9-4-2-复写传播"><a href="#9-4-2-复写传播" class="headerlink" title="9.4.2 复写传播"></a>9.4.2 复写传播</h3><h3 id="9-4-3-寻找循环不变计算"><a href="#9-4-3-寻找循环不变计算" class="headerlink" title="9.4.3 寻找循环不变计算"></a>9.4.3 寻找循环不变计算</h3></li>
+</ul>
+</li>
+<li>输入 循环L，对L的每个三地址语句，有ud链可用。</li>
+<li>输出 从控制进入L一直到离开L，每次都计算同样值的三地址语句被输出。</li>
+<li>方法<ul>
+<li>把运算对象都是常量（或其所有的到达定值都在L外）的语句，标记为“不变”语句。</li>
+<li>重复下一步，直到没有新的语句标记为“不变”为止</li>
+<li>给下面的语句标记“不变”：它们先前没有标记，并且所有的运算对象都是下列三种情况之一：<br>  （a）常量；（b）其所有的到达定值都在L外；<br>  （c）只有一个到达定值，这个定值是循环中已标记为“不变”的语句。<h3 id="9-4-4-代码外提"><a href="#9-4-4-代码外提" class="headerlink" title="9.4.4 代码外提"></a>9.4.4 代码外提</h3></li>
+</ul>
+</li>
+<li>将循环不变语句提到循环的前置结点中</li>
+<li>并不是所有的循环不变语句都可以外提<h3 id="9-4-5-归纳变量删除"><a href="#9-4-5-归纳变量删除" class="headerlink" title="9.4.5 归纳变量删除"></a>9.4.5 归纳变量删除</h3></li>
+<li>循环归纳变量:在循环中，其值的每次改变都增加或减少某个固定的常量</li>
+<li>基本归纳变量：在循环中只有一个形如i :&#x3D; i  c的i，其中c是常量</li>
+<li>其它归纳变量:在循环中仅定值一次，并且其值是某个基本归纳变量的线性函数</li>
+<li>寻找归纳变量<ul>
+<li>找出所有基本归纳变量i :&#x3D; i ± c，描述为(i, 1, 0)的形式</li>
+<li>寻找只有一个赋值的k，其形式为：k :&#x3D; j<em>b, k :&#x3D; b</em>j, k :&#x3D; j &#x2F; b, k :&#x3D; j ± b, k :&#x3D; b ±  j</li>
+<li>其中b是常数，j是基本的或非基本的归纳变量</li>
+</ul>
+</li>
+</ul>
+
     </div>
 
     
@@ -304,6 +427,8 @@
 <script src="/FOC.github.io/js/comments.js"></script><script src="/FOC.github.io/js/utils.js"></script><script src="/FOC.github.io/js/motion.js"></script><script src="/FOC.github.io/js/next-boot.js"></script>
 
   
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/FOC.github.io/js/third-party/search/local-search.js"></script>
 
 
   <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>

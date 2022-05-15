@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/FOC.github.io/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/FOC.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/FOC.github.io/js/config.js"></script>
 
     <meta name="description" content="通常,除了编译器外，还需要些其他工具的帮助，才能得到可执行的目标程序 .这些工具包括预处理器、汇编器和连接器等。对于FORTRAN和C等语言来说,这些工具都较简单和明量。了解这些工具有助于掌握从源程序到可执行目标程序的实际处理过程,这些知识对于参与大型软件系统的开发是很有用的。本章介绍C语言编译系统。此外，目标代码运行时,还需要一些工具的支撑， 如动态连接程序、无用单元收集程序等，这些工具的集合称">
 <meta property="og:type" content="article">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="通常,除了编译器外，还需要些其他工具的帮助，才能得到可执行的目标程序 .这些工具包括预处理器、汇编器和连接器等。对于FORTRAN和C等语言来说,这些工具都较简单和明量。了解这些工具有助于掌握从源程序到可执行目标程序的实际处理过程,这些知识对于参与大型软件系统的开发是很有用的。本章介绍C语言编译系统。此外，目标代码运行时,还需要一些工具的支撑， 如动态连接程序、无用单元收集程序等，这些工具的集合称">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-04-07T01:22:55.000Z">
-<meta property="article:modified_time" content="2022-04-16T13:02:20.501Z">
+<meta property="article:modified_time" content="2022-05-15T08:29:48.530Z">
 <meta property="article:author" content="隋纪运">
 <meta property="article:tag" content="-介绍">
 <meta name="twitter:card" content="summary">
@@ -88,6 +88,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -96,11 +97,37 @@
 
 <nav class="site-nav">
   <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/FOC.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/FOC.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/FOC.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/FOC.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/FOC.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/FOC.github.io/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
         
@@ -113,7 +140,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -126,6 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1-C%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.</span> <span class="nav-text">11.1  C语言编译系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-1-%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">11.1.1 预处理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-2-%E6%B1%87%E7%BC%96%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">11.1.2 汇编器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-3-%E8%BF%9E%E6%8E%A5%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text">11.1.3 连接器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-4-%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E7%9A%84%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">11.1.4 目标文件的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-5-%E7%AC%A6%E5%8F%B7%E8%A7%A3%E6%9E%90"><span class="nav-number">1.5.</span> <span class="nav-text">11.1.5 符号解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-6-%E9%9D%99%E6%80%81%E5%BA%93"><span class="nav-number">1.6.</span> <span class="nav-text">11.1.6 静态库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-7-%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E5%8F%8A%E8%A3%85%E5%85%A5"><span class="nav-number">1.7.</span> <span class="nav-text">11.1.7 可执行目标文件及装入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-8-%E5%8A%A8%E6%80%81%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.8.</span> <span class="nav-text">11.1.8 动态连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-2-Java%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E8%A1%8C%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.</span> <span class="nav-text">11.2  Java语言的运行系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-2-1-Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%AF%AD%E8%A8%80%E7%AE%80%E4%BB%8B"><span class="nav-number">2.1.</span> <span class="nav-text">11.2.1 Java虚拟机语言简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-2-2-Java%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">2.2.</span> <span class="nav-text">11.2.2 Java虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-2-3-%E5%8D%B3%E6%97%B6%E7%BC%96%E8%AF%91%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">11.2.3 即时编译器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-3-%E6%97%A0%E7%94%A8%E5%8D%95%E5%85%83%E6%94%B6%E9%9B%86"><span class="nav-number">3.</span> <span class="nav-text">11.3 无用单元收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-3-1-%E6%A0%87%E8%AE%B0%E5%92%8C%E6%B8%85%E6%89%AB"><span class="nav-number">3.1.</span> <span class="nav-text">11.3.1 标记和清扫</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-3-2-%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">11.3.2 引用计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-3-3-%E6%8B%B7%E8%B4%9D%E6%94%B6%E9%9B%86"><span class="nav-number">3.3.</span> <span class="nav-text">11.3.3 拷贝收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-3-4-%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86"><span class="nav-number">3.4.</span> <span class="nav-text">11.3.4 分代收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-3-5-%E6%B8%90%E5%A2%9E%E5%BC%8F%E6%94%B6%E9%9B%86"><span class="nav-number">3.5.</span> <span class="nav-text">11.3.5 渐增式收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-3-6-%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%8E%E6%94%B6%E9%9B%86%E5%99%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E7%9B%B8%E4%BA%92%E5%BD%B1%E5%93%8D"><span class="nav-number">3.6.</span> <span class="nav-text">11.3.6 编译器与收集器之间的相互影响</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -226,7 +254,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-04-16 21:02:20" itemprop="dateModified" datetime="2022-04-16T21:02:20+08:00">2022-04-16</time>
+      <time title="修改时间：2022-05-15 16:29:48" itemprop="dateModified" datetime="2022-05-15T16:29:48+08:00">2022-05-15</time>
     </span>
 
   
@@ -241,6 +269,144 @@
     <div class="post-body" itemprop="articleBody">
         <p>通常,除了编译器外，还需要些其他工具的帮助，才能得到可执行的目标程序 .这些工具包括预处理器、汇编器和连接器等。对于FORTRAN和C等语言来说,这些工具都较简单和明量。了解这些工具有助于掌握从源程序到可执行目标程序的实际处理过程,这些知识对于参与大型软件系统的开发是很有用的。本章介绍C语言编译系统。此外，目标代码运行时,还需要一些工具的支撑， 如动态连接程序、无用单元收集程序等，这些工具的集合称为运行时系统。本章还介绍Java语言的运行时系统及其无用单元收集程序。</p>
 <span id="more"></span>
+
+<h2 id="11-1-C语言编译系统"><a href="#11-1-C语言编译系统" class="headerlink" title="11.1  C语言编译系统"></a>11.1  C语言编译系统</h2><p>C源程序可以分成若干个模块，分别进行预处理、编译和汇编、形成可重定位的目标文件。目标文件和必要的库文件连接成一个可执行的目标文件， gcc和cc是编译驱动程序的名字 。</p>
+<h3 id="11-1-1-预处理器"><a href="#11-1-1-预处理器" class="headerlink" title="11.1.1 预处理器"></a>11.1.1 预处理器</h3><ul>
+<li>gcc首先调用预处理器cpp，将源程序文件翻译成一个ASCII中间文件，它是经修改后的源程序</li>
+<li>cpp实现以下功能：<ul>
+<li>文件包含</li>
+<li>宏展开</li>
+<li>条件编译<h3 id="11-1-2-汇编器"><a href="#11-1-2-汇编器" class="headerlink" title="11.1.2 汇编器"></a>11.1.2 汇编器</h3></li>
+</ul>
+</li>
+<li>GCC系统的编译器cc1产生汇编代码</li>
+<li>最简单的汇编器对输入进行两遍扫描</li>
+<li>一遍扫描完成汇编代码到可重定位目标代码的翻译也是完全可能的</li>
+<li>用gcc -S main.c可以得到汇编文件main.s</li>
+<li>用as -o main.o main.s可以将main.s汇编成可重定位目标文件main.o <h3 id="11-1-3-连接器"><a href="#11-1-3-连接器" class="headerlink" title="11.1.3 连接器"></a>11.1.3 连接器</h3></li>
+<li>目标模块或目标文件的形式<ul>
+<li>可重定位的目标文件</li>
+<li>可执行的目标文件</li>
+<li>共享目标文件<ul>
+<li>一种特殊的可重定位目标文件</li>
+<li>在装入程序或运行程序时，动态地装入到内存并连接</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>连接是一个收集、组织程序所需的不同代码和数据的过程，以便程序能被装入内存并被执行</li>
+<li>连接的时机<ul>
+<li>编译时</li>
+<li>装入时</li>
+<li>运行时</li>
+<li>静态连接器</li>
+<li>动态连接器<h3 id="11-1-4-目标文件的格式"><a href="#11-1-4-目标文件的格式" class="headerlink" title="11.1.4 目标文件的格式"></a>11.1.4 目标文件的格式</h3></li>
+</ul>
+</li>
+<li>目标文件格式随系统不同而不同</li>
+<li>介绍Unix的ELF（Executable and Linkable Format）格式</li>
+<li>Linux、System V Unix的后期版本、BSD Unix变体和Sun Solaris，都使用Unix的ELF格式<h3 id="11-1-5-符号解析"><a href="#11-1-5-符号解析" class="headerlink" title="11.1.5 符号解析"></a>11.1.5 符号解析</h3></li>
+<li>将每个符号引用正确地与某可重定位模块的符号表中的一个符号定义相关联，从而确定各个符号引用的位置</li>
+<li>在所有输入模块中都找不到被引用符号的定义，则打印错误消息并结束连接</li>
+<li>需要定义解析规则<ul>
+<li>解析规则：函数和已初始化的全局变量称为强符号；未初始化的全局变量称为弱符号</li>
+<li>不允许有多重的强符号定义</li>
+<li>出现一个强符号定义和多个弱符号定义时，选择强符号的定义</li>
+<li>出现多个弱符号定义时，选择任意一个弱符号的定义 <h3 id="11-1-6-静态库"><a href="#11-1-6-静态库" class="headerlink" title="11.1.6 静态库"></a>11.1.6 静态库</h3></li>
+</ul>
+</li>
+<li>将相关的可重定位目标模块打包成一个文件,作为连接器的输入</li>
+<li>连接器仅复制库中被应用程序引用的模块<h3 id="11-1-7-可执行目标文件及装入"><a href="#11-1-7-可执行目标文件及装入" class="headerlink" title="11.1.7 可执行目标文件及装入"></a>11.1.7 可执行目标文件及装入</h3></li>
+<li>可执行目标文件与可重定位目标文件格式类似</li>
+<li>可执行目标文件的装入由加载器完成<h3 id="11-1-8-动态连接"><a href="#11-1-8-动态连接" class="headerlink" title="11.1.8 动态连接"></a>11.1.8 动态连接</h3></li>
+<li>静态库<br>  周期性地被维护和更新<br>  内存可能有多份printf和scanf的代码</li>
+<li>共享库<br> 在运行时可以装到任意的内存位置，被内存中的进程共享<h2 id="11-2-Java语言的运行系统"><a href="#11-2-Java语言的运行系统" class="headerlink" title="11.2  Java语言的运行系统"></a>11.2  Java语言的运行系统</h2><h3 id="11-2-1-Java虚拟机语言简介"><a href="#11-2-1-Java虚拟机语言简介" class="headerlink" title="11.2.1 Java虚拟机语言简介"></a>11.2.1 Java虚拟机语言简介</h3></li>
+<li>Java程序首先由Java编译器把它编译成字节码，也就是JVML程序。</li>
+<li>常量池: 各种字符串常量,类似于传统程序设计语言中的符号表</li>
+<li>类成员信息: 域信息表和方法信息表</li>
+<li>JVML指令序列<h3 id="11-2-2-Java虚拟机"><a href="#11-2-2-Java虚拟机" class="headerlink" title="11.2.2 Java虚拟机"></a>11.2.2 Java虚拟机</h3>Java虚拟机一般由以下几个部分构成：<ul>
+<li>类加载器（字节码验证器）</li>
+<li>解释器或&#x2F;和编译器</li>
+<li>包括无用单元收集器和线程控制模块在内的运行支持系统，</li>
+<li>另外还有一些标准类和应用接口的class文件库<h3 id="11-2-3-即时编译器"><a href="#11-2-3-即时编译器" class="headerlink" title="11.2.3 即时编译器"></a>11.2.3 即时编译器</h3></li>
+</ul>
+</li>
+<li>当一个类的某个方法第一次被调用时，虚拟机才激活即时编译器将它编译成机器代码生成的代码的执行速度可以达到解释执行的10倍</li>
+<li>但是执行过程不得不等待编译的结束，因此使得执行时间变长</li>
+<li>很多虚拟机都会使用快速解释器和优化编译器的组合或者是简单编译器和复杂编译器的组合<h2 id="11-3-无用单元收集"><a href="#11-3-无用单元收集" class="headerlink" title="11.3 无用单元收集"></a>11.3 无用单元收集</h2></li>
+<li>无用单元收集器需要根据数据的活跃性来判断哪些是无用单元</li>
+<li>活跃性分析采用稳妥策略，是通过根集以及从根集开始的可达性来定义活跃性</li>
+<li>因此从实现的角度，无用单元是那些不可能从程序变量经指针链到达的堆分配记录 </li>
+<li>无用单元收集可能需要来自编译器、操作系统和硬件方面的支持<h3 id="11-3-1-标记和清扫"><a href="#11-3-1-标记和清扫" class="headerlink" title="11.3.1 标记和清扫"></a>11.3.1 标记和清扫</h3></li>
+<li>方法概述：首先标记堆上所有可达记录，然后回收未被标记的记录 <ul>
+<li>根集包含了全局变量、活动记录栈中的局部变量和被活跃着的过程使用的寄存器</li>
+<li>堆上活跃记录的集合是从根集开始的任何一条指针路径上的记录的集合</li>
+<li>任何图遍历算法，都可用于标记所有的可达记录</li>
+<li>清扫从堆的首地址开始, 逐个记录地考察整个堆, 寻找未被标记的记录, 把它们链成一个空闲链表</li>
+</ul>
+</li>
+<li>传统的标记和清扫方法的问题 <ul>
+<li>碎片问题：当要分配一个n字节大小的记录时，发现有很多小于n字节的空闲块存在，但就是没有合适的空闲块可分配给这个记录</li>
+<li>引用局部性问题：使用块和空闲块相互交织，使得当前要使用的各个活跃记录被分散到很多的虚拟内存页中，这些页在内存中可能被频繁地换进换出 <h3 id="11-3-2-引用计数"><a href="#11-3-2-引用计数" class="headerlink" title="11.3.2 引用计数"></a>11.3.2 引用计数</h3></li>
+</ul>
+</li>
+<li>方法概述：通过记住有多少指针指向每个记录来直接完成标记，引用计数存在各记录中<ul>
+<li>编译器需要在每个出现指针存储的地方生成额外的指令，以调整一些引用计数器的值</li>
+<li>当一个记录的引用计数值为0的时候，就可以把该记录加入空闲链表</li>
+<li>被回收记录本身的指针域都要一一检查，它们所指向的记录的引用计数值也都要减1</li>
+</ul>
+</li>
+<li>引用计数方法的问题<ul>
+<li>碎片和引用局部性问题仍然存在</li>
+<li>并非总有效：对于循环的数据结构会失效，因为这些记录的引用计数也永远不可能减到零</li>
+<li>代价高，因为每当执行指针存储的时候，都需要执行额外的指令来调整一些引用计数</li>
+<li>引用计数收集已经被跟踪型收集代替，标记和清扫收集方法就是一种跟踪型收集方法<h3 id="11-3-3-拷贝收集"><a href="#11-3-3-拷贝收集" class="headerlink" title="11.3.3 拷贝收集"></a>11.3.3 拷贝收集</h3></li>
+</ul>
+</li>
+<li>方法概述<ul>
+<li>这个算法和标记和清除算法一样，也遍历可达记录所组成的有向图，只不过它在遍历的同时进行清扫，并且这种清扫主要是拷贝活跃记录</li>
+<li>这种方法将堆空间分成大小相等的两块，每块都是连续的区域</li>
+</ul>
+</li>
+<li>优缺点<ul>
+<li>从理论上来说，只要有足够的内存，可得到很高的效率</li>
+<li>可以将活跃数据紧缩在一起，碎片情况消失，引用局部性得到改善</li>
+<li>需要的空间是实际需要空间的两倍</li>
+<li>拷贝大记录的代价太大<h3 id="11-3-4-分代收集"><a href="#11-3-4-分代收集" class="headerlink" title="11.3.4 分代收集"></a>11.3.4 分代收集</h3></li>
+</ul>
+</li>
+<li>原理<ul>
+<li>很多程序在运行过程中，新建记录很可能很快死去，不会出现对它的拷贝；反过来，一个记录在几次收集后还可到达的话，那么很可能还会活跃到许多次收集后</li>
+<li>收集器应该将精力集中到“年轻”的数据上，因为这里有相对高的无用单元比率</li>
+</ul>
+</li>
+<li>基本做法<ul>
+<li>堆被分成代，最年轻的记录在G0代，Gi (i &gt; 0)代中的记录比Gi1代中的任何记录都要老。越年轻的代越被频繁地收集</li>
+<li>对G0代进行收集时，这时的根集不仅仅是程序变量，它还包括G1, G2,…中指向G0的指针。幸好，老记录指向年轻得多的记录的情况极少出现，通常是较新的记录指向老记录</li>
+<li>为了避免确定G0的根集时在G1, G2,…中查找，需要编译器提供一些支持，方法有多种<h3 id="11-3-5-渐增式收集"><a href="#11-3-5-渐增式收集" class="headerlink" title="11.3.5 渐增式收集"></a>11.3.5 渐增式收集</h3></li>
+</ul>
+</li>
+<li>缘由<ul>
+<li>虽然收集时间的总和只占整个程序运行时间很小的百分比，但是收集器仍然有可能偶尔将运行程序中断相对长的时间，对于交互式程序和实时程序来说，这一点是难以接受的</li>
+</ul>
+</li>
+<li>改进<ul>
+<li>渐增式收集：程序运行和无用单元收集交错进行</li>
+<li>困难在于，当收集器在做遍历以得到一个可达记录图时，运行程序并没有停止修改可达记录图 <h3 id="11-3-6-编译器与收集器之间的相互影响"><a href="#11-3-6-编译器与收集器之间的相互影响" class="headerlink" title="11.3.6 编译器与收集器之间的相互影响"></a>11.3.6 编译器与收集器之间的相互影响</h3></li>
+</ul>
+</li>
+<li>对收集器的底层有下面这些基本要求 <ul>
+<li>能确定堆上分配的记录大小</li>
+<li>能定位包含在堆记录里的指针</li>
+<li>能定位所有在全局变量中的指针</li>
+<li>能在程序中任何可进行收集的地方找到所有在活动记录栈中和寄存器中的指针</li>
+<li>能找到所有由指针运算所产生的值指向的记录</li>
+<li>能在记录被移动时，更新所有涉及到的指针值</li>
+</ul>
+</li>
+<li>很多所需信息只有在编译时能够获得</li>
+</ul>
+
     </div>
 
     
@@ -304,6 +470,8 @@
 <script src="/FOC.github.io/js/comments.js"></script><script src="/FOC.github.io/js/utils.js"></script><script src="/FOC.github.io/js/motion.js"></script><script src="/FOC.github.io/js/next-boot.js"></script>
 
   
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/FOC.github.io/js/third-party/search/local-search.js"></script>
 
 
   <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
