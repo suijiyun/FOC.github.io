@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/FOC.github.io/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/FOC.github.io/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/FOC.github.io/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/FOC.github.io/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/FOC.github.io/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" integrity="sha256-jTIdiMuX/e3DGJUGwl3pKSxuc6YOuqtJYkM0bGQESA4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"suijiyun.github.io","root":"/FOC.github.io/","images":"/FOC.github.io/images","scheme":"Pisces","darkmode":false,"version":"8.10.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/FOC.github.io/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/FOC.github.io/js/config.js"></script>
+
+    <meta name="description" content="词法分析阅读构成源程序的字符流，按编程语言的词法规则把它们组成词法记号流。对于一个词法单元，词法分析产生的记号是：        &lt;记号名， 属性值&gt;二元组。记号名是同类词法单元共用的名称，而属性值是一个词法单元有别于同类中其他词法单元的特征值。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="词法分析">
+<meta property="og:url" content="https://suijiyun.github.io/FOC.github.io/2022/05/15/blog-15/index.html">
+<meta property="og:site_name" content="编译原理">
+<meta property="og:description" content="词法分析阅读构成源程序的字符流，按编程语言的词法规则把它们组成词法记号流。对于一个词法单元，词法分析产生的记号是：        &lt;记号名， 属性值&gt;二元组。记号名是同类词法单元共用的名称，而属性值是一个词法单元有别于同类中其他词法单元的特征值。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-15T14:23:33.000Z">
+<meta property="article:modified_time" content="2022-05-15T15:02:41.855Z">
+<meta property="article:author" content="隋纪运">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://suijiyun.github.io/FOC.github.io/2022/05/15/blog-15/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://suijiyun.github.io/FOC.github.io/2022/05/15/blog-15/","path":"2022/05/15/blog-15/","title":"词法分析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>词法分析 | 编译原理</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/FOC.github.io/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+  
+  <a target="_blank" rel="noopener" href="https://github.com/suijiyun" class="github-corner" aria-label="View source on GitHub">
+	<svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+		<path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+		<path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+		<path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+	</svg>
+  </a>
+  <style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+  </style>
+  
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/FOC.github.io/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">编译原理</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/FOC.github.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/FOC.github.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/FOC.github.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/FOC.github.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/FOC.github.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/FOC.github.io/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="隋纪运"
+      src="/FOC.github.io/images/sgs.jpg">
+  <p class="site-author-name" itemprop="name">隋纪运</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/FOC.github.io/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/FOC.github.io/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/FOC.github.io/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://suijiyun.github.io/FOC.github.io/2022/05/15/blog-15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/FOC.github.io/images/sgs.jpg">
+      <meta itemprop="name" content="隋纪运">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="编译原理">
+      <meta itemprop="description" content="">
+    </span>
+    
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="词法分析 | 编译原理">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          词法分析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2022-05-15 22:23:33 / 修改时间：23:02:41" itemprop="dateCreated datePublished" datetime="2022-05-15T22:23:33+08:00">2022-05-15</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>词法分析阅读构成源程序的字符流，按编程语言的词法规则把它们组成词法记号流。对于一个词法单元，词法分析产生的记号是：<br>        &lt;记号名， 属性值&gt;<br>二元组。记号名是同类词法单元共用的名称，而属性值是一个词法单元有别于同类中其他词法单元的特征值。</p>
+<span id="more"></span>
+
+<p>（1）输入：一个C语言编写的程序（源代码）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">int main() &#123;</span><br><span class="line">	int n;</span><br><span class="line">	scanf(&quot;%d&quot;, &amp;n);</span><br><span class="line">	int* f;</span><br><span class="line">    f = (int*)malloc((n+1)*sizeof(int));</span><br><span class="line">    f[1] = f[2] = 1;</span><br><span class="line">    int i;</span><br><span class="line">    for( i=3; i&lt;=n; i++ ) &#123;</span><br><span class="line">		f[i] = f[i-1] + f[i-2];</span><br><span class="line">	&#125;</span><br><span class="line">    printf(&quot;%d&quot;, f[n]);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（2）处理：对输入进行分析，分离出关键字、算符、界符、标识符和常量，判断是否符合构词规则，分类。<br>思路：<br>对输入的源代码每行进行词法分析；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">string file;</span><br><span class="line">		vector&lt;string&gt; v;</span><br><span class="line">		pf(&quot;请输入文件路径：\n&quot;);</span><br><span class="line">		cin &gt;&gt; file;</span><br><span class="line">		ifstream ifs;</span><br><span class="line">		ifs.open(file);</span><br><span class="line">		if( ifs ) &#123;</span><br><span class="line">			while( !ifs.eof() ) &#123;</span><br><span class="line">				char s[512];</span><br><span class="line">				ifs.getline(s,512,&#x27;\n&#x27;);</span><br><span class="line">				int x = 0;</span><br><span class="line">				string s0 = &quot;&quot;;</span><br><span class="line">				while( s[x]!=&#x27;\0&#x27; )	s0 += s[x++];</span><br><span class="line">				if( !s0.empty() ) v.push_back(s0);</span><br><span class="line">			&#125;</span><br><span class="line">			idnum = 0;</span><br><span class="line">			pf(&quot;-----------------------\n&quot;);</span><br><span class="line">			vid.clear();</span><br><span class="line">			int len = v.size();</span><br><span class="line">			for( int i=0; i&lt;len; i++ ) &#123;</span><br><span class="line">				Lexcial_analyzer(v[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			pf(&quot;文件打开失败！请重新输入\n&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		ifs.close();</span><br></pre></td></tr></table></figure>
+<p>第一次分割按照空格和制表符；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for( int i=0; i&lt;len; i++ ) &#123;</span><br><span class="line">		if( s[i]!=&#x27; &#x27;&amp;&amp;s[i]!=&#x27;\t&#x27; ) &#123;</span><br><span class="line">			s0 += s[i];</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			if( !s0.empty() ) v1.push_back(s0);</span><br><span class="line">			s0 = &quot;&quot;;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	if( !s0.empty() ) v1.push_back(s0);</span><br></pre></td></tr></table></figure>
+<p>第二次按照界符和运算符分割；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">int vlen = v1.size();</span><br><span class="line">	for( int i=0; i&lt;vlen; i++ ) &#123;</span><br><span class="line">//		cout &lt;&lt; v[i] &lt;&lt; &quot;--asd--&quot; &lt;&lt; v[i].size() &lt;&lt; endl;</span><br><span class="line">		string sword = v1[i];</span><br><span class="line">		int lsw = sword.size();</span><br><span class="line">		string sp = &quot;&quot;;</span><br><span class="line">		for( int j=0; j&lt;lsw; j++ ) &#123;</span><br><span class="line">			char* p = find(Delimiter, Delimiter+strlen(Delimiter), sword[j]);</span><br><span class="line">			if( p!=Delimiter+strlen(Delimiter) ) &#123;</span><br><span class="line">				if( !sp.empty() ) &#123;</span><br><span class="line">					string spnew1 = &quot;&quot;;</span><br><span class="line">					string spnew2 = &quot;&quot;;</span><br><span class="line">					int len_sp = sp.size();</span><br><span class="line">					for( int k=0; k&lt;len_sp; k++ ) &#123;</span><br><span class="line">						if( (&#x27;0&#x27;&lt;=sp[k]&amp;&amp;sp[k]&lt;=&#x27;9&#x27;)||(&#x27;a&#x27;&lt;=sp[k]&amp;&amp;sp[k]&lt;=&#x27;z&#x27;)||(&#x27;A&#x27;&lt;=sp[k]&amp;&amp;sp[k]&lt;=&#x27;Z&#x27;)||sp[k]==&#x27;_&#x27; ) &#123;</span><br><span class="line">							if( !spnew1.empty() ) v2.push_back(spnew1);</span><br><span class="line">							spnew1 = &quot;&quot;;</span><br><span class="line">							spnew2 += sp[k];</span><br><span class="line">						&#125;else &#123;</span><br><span class="line">							if( !spnew2.empty() ) v2.push_back(spnew2);</span><br><span class="line">							spnew2 = &quot;&quot;;</span><br><span class="line">							spnew1 += sp[k];</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					if( !spnew1.empty() ) v2.push_back(spnew1);</span><br><span class="line">					if( !spnew2.empty() ) v2.push_back(spnew2);</span><br><span class="line">				&#125;</span><br><span class="line">				sp = &quot;&quot;;</span><br><span class="line">				string sschar = &quot;&quot;;</span><br><span class="line">				sschar += sword[j];</span><br><span class="line">				v2.push_back(sschar);</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				sp += sword[j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">  		if( !sp.empty() ) &#123;</span><br><span class="line">			string spnew1 = &quot;&quot;;</span><br><span class="line">			string spnew2 = &quot;&quot;;</span><br><span class="line">			int len_sp = sp.size();</span><br><span class="line">			for( int k=0; k&lt;len_sp; k++ ) &#123;</span><br><span class="line">				if( (&#x27;0&#x27;&lt;=sp[k]&amp;&amp;sp[k]&lt;=&#x27;9&#x27;)||(&#x27;a&#x27;&lt;=sp[k]&amp;&amp;sp[k]&lt;=&#x27;z&#x27;)||(&#x27;A&#x27;&lt;=sp[k]&amp;&amp;sp[k]&lt;=&#x27;Z&#x27;)||sp[k]==&#x27;_&#x27; ) &#123;</span><br><span class="line">					if( !spnew1.empty() ) v2.push_back(spnew1);</span><br><span class="line">					spnew1 = &quot;&quot;;</span><br><span class="line">					spnew2 += sp[k];</span><br><span class="line">				&#125;else &#123;</span><br><span class="line">					if( !spnew2.empty() ) v2.push_back(spnew2);</span><br><span class="line">					spnew2 = &quot;&quot;;</span><br><span class="line">					spnew1 += sp[k];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			if( !spnew1.empty() ) v2.push_back(spnew1);</span><br><span class="line">			if( !spnew2.empty() ) v2.push_back(spnew2);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>然后对头文件的文件名和左右尖括号特判，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">bool isj = false;</span><br><span class="line">	bool isdeli = false;</span><br><span class="line">	string filename = &quot;&quot;;</span><br><span class="line">	vlen = v2.size();</span><br><span class="line">	for( int i=0; i&lt;vlen; i++ ) &#123;</span><br><span class="line">		if( v2[i]==&quot;&gt;&quot; ) isj = false;</span><br><span class="line">		if( isj ) &#123;</span><br><span class="line">			filename += v2[i];</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">	//		string* p = find(Keyword, Keyword+33, v2[i]);</span><br><span class="line">			if( !filename.empty() ) &#123;</span><br><span class="line">				pf(&quot;%16s: &lt;filename, %s&gt;\n&quot;, filename.c_str(), filename.c_str());</span><br><span class="line">				filename = &quot;&quot;;</span><br><span class="line">			&#125;</span><br><span class="line">//			cout &lt;&lt; v2[i] &lt;&lt; endl;</span><br><span class="line">			if( v2[i]==&quot;&lt;&quot;&amp;&amp;isd ) &#123;</span><br><span class="line">				pf(&quot;%16c: &lt;Delimiter, 13&gt;\n&quot;, &#x27;&lt;&#x27;);</span><br><span class="line">			&#125;else if( isd&amp;&amp;v2[i]==&quot;&gt;&quot; ) &#123;</span><br><span class="line">				pf(&quot;%16c: &lt;Delimiter, 14&gt;\n&quot;, &#x27;&gt;&#x27;);</span><br><span class="line">				isd = false;</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				D data = F(v2[i]);</span><br><span class="line">				if( data.pos&lt;0 ) &#123;</span><br><span class="line">					pf(&quot;%16s: ERROR!!!\n&quot;, data.name.c_str());</span><br><span class="line">				&#125;else &#123;</span><br><span class="line">					pf(&quot;%16s: &lt;%s, %d&gt;\n&quot;, data.name.c_str(), data.type.c_str(), data.pos);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">		if( isd&amp;&amp;v2[i]==&quot;&lt;&quot; ) isj = true;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>再将分割好的每一个词分成关键字、算符、界符、标识符、常量和不符合构词规则六类；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">D F(string s) &#123;</span><br><span class="line">	int l = s.size();</span><br><span class="line">	D data;</span><br><span class="line">	data.name = s;</span><br><span class="line">	</span><br><span class="line">	if( l==1 ) &#123;</span><br><span class="line">		if( &#x27;0&#x27;&lt;=s[0]&amp;&amp;s[0]&lt;=&#x27;9&#x27; ) &#123;</span><br><span class="line">			data.type = &quot;Number&quot;;</span><br><span class="line">			data.pos = (int)(s[0]-&#x27;0&#x27;);</span><br><span class="line">		&#125;else if( (&#x27;a&#x27;&lt;=s[0]&amp;&amp;s[0]&lt;=&#x27;z&#x27;)||(&#x27;A&#x27;&lt;=s[0]&amp;&amp;s[0]&lt;=&#x27;Z&#x27;) ) &#123;</span><br><span class="line">			data.type = &quot;ID&quot;;</span><br><span class="line">			vector&lt;string&gt;::iterator iter = find(vid.begin(), vid.end(), s);</span><br><span class="line">			if( iter!=vid.end() ) &#123;</span><br><span class="line">				data.pos = iter-vid.begin();</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				vid.push_back(s);</span><br><span class="line">				data.pos = idnum;</span><br><span class="line">				idnum++;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			data.type = &quot;Delimiter&quot;;</span><br><span class="line">			int i;</span><br><span class="line">			for( i=0; i&lt;13; i++ ) &#123;</span><br><span class="line">				if( Delimiter[i]==s[0] ) &#123;</span><br><span class="line">					data.pos = i;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			if( i&gt;=13 )&#123;</span><br><span class="line">				data.type = &quot;Operator&quot;;</span><br><span class="line">				int j;</span><br><span class="line">				for( int j=0; j&lt;38; j++ ) &#123;</span><br><span class="line">					if( Operator[i]==s ) &#123;</span><br><span class="line">						data.pos = i;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				if( j&gt;=38 ) data.pos = -1;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;else &#123;</span><br><span class="line">		if( (&#x27;a&#x27;&lt;=s[0]&amp;&amp;s[0]&lt;=&#x27;z&#x27;)||(&#x27;A&#x27;&lt;=s[0]&amp;&amp;s[0]&lt;=&#x27;Z&#x27;)||s[0]==&#x27;_&#x27; ) &#123;</span><br><span class="line">			int i;</span><br><span class="line">			for( i=0; i&lt;33; i++ ) &#123;</span><br><span class="line">				if( Keyword[i]==s) &#123;</span><br><span class="line">					data.pos = i;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			if( i&gt;=33 ) &#123;</span><br><span class="line">				int j;</span><br><span class="line">				for( j=1; j&lt;s.size(); j++ ) &#123;</span><br><span class="line">					if( ( (&#x27;0&#x27;&lt;=s[j]&amp;&amp;s[j]&lt;=&#x27;9&#x27;)||(&#x27;a&#x27;&lt;=s[j]&amp;&amp;s[j]&lt;=&#x27;z&#x27;)||(&#x27;A&#x27;&lt;=s[j]&amp;&amp;s[j]&lt;=&#x27;Z&#x27;)||s[j]==&#x27;_&#x27; ) ) &#123;</span><br><span class="line">						break;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				if( j&gt;=s.size() ) &#123;</span><br><span class="line">					data.pos = -1;</span><br><span class="line">				&#125; else &#123;</span><br><span class="line">					data.type = &quot;ID&quot;;</span><br><span class="line">					vector&lt;string&gt;::iterator iter = find(vid.begin(), vid.end(), s);</span><br><span class="line">					if( iter!=vid.end() ) &#123;</span><br><span class="line">						data.pos = iter-vid.begin();</span><br><span class="line">					&#125;else &#123;</span><br><span class="line">						vid.push_back(s);</span><br><span class="line">						data.pos = idnum;</span><br><span class="line">						idnum++;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				data.type = &quot;Keyword&quot;;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			data.type = &quot;Operator&quot;;</span><br><span class="line">			int i;</span><br><span class="line">			for( i=0; i&lt;38; i++ ) &#123;</span><br><span class="line">				if( Operator[i]==s) &#123;</span><br><span class="line">					data.pos = i;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			if( i&gt;=38 ) data.pos = -1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	return data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>（3）输出：对应的二元式。<br>二元式构成为&lt;type, value&gt;，其中type包含Keyword、Delimiter、Operator、ID、Number，前三个的value是它们所在数组的下标，ID的value是出现的次序，Number的value就是它本身的值。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/FOC.github.io/2022/04/07/blog-14/" rel="prev" title="第十三章 函数式语言的编译">
+                  <i class="fa fa-chevron-left"></i> 第十三章 函数式语言的编译
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">隋纪运</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/FOC.github.io/js/comments.js"></script><script src="/FOC.github.io/js/utils.js"></script><script src="/FOC.github.io/js/motion.js"></script><script src="/FOC.github.io/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/FOC.github.io/js/third-party/search/local-search.js"></script>
+
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@8.14.0/dist/mermaid.min.js","integrity":"sha256-7wT34TI0pEBeEFoi4z+vhuSddGh6vUTMWdqJ2SDe2jg="}}</script>
+  <script src="/FOC.github.io/js/third-party/tags/mermaid.js"></script>
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"suijiyun","repo":"FOC.github.io","client_id":"34ddbce699e5f98beff7","client_secret":"44776059adadd24365afe6913263389cdf70940e","admin_user":"suijiyun","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"780658991f547367bd80e1c52ba72d3f"}</script>
+<script src="/FOC.github.io/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
